@@ -4,6 +4,8 @@ timeout 15
 preload_app true
 
 app_path = File.join(File.dirname(__FILE__), '../..')
+listen File.join(app_path, 'tmp/sockets/unicorn.sock')
+pid File.join(app_path, 'tmp/pids/unicorn.pid')
 stderr_path File.join(app_path, 'log/unicorn.stderr.log')
 stdout_path File.join(app_path, 'log/unicorn.stdout.log')
 
