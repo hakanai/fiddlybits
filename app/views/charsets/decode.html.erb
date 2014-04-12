@@ -1,0 +1,58 @@
+<%= form_for(:form, method: 'GET') do |f| %>
+  <p>
+    Data to decode:<br/>
+    <%= f.text_area(:data, rows: 16, cols: 80) %>
+  </p>
+
+  <p>
+    Treat input as:
+    <label><%= f.radio_button(:type, 'text') %>Raw Text</label>
+    <label><%= f.radio_button(:type, 'hex') %>Binary as Hex</label>
+  </p>
+
+  <p>
+    Decode using charset:
+    <%= f.collection_select(:charset, @charsets, :name, :name) %>
+  </p>
+
+  <p>
+    <%= f.submit('Submit') %>
+  </p>
+<% end %>
+
+<% if @result %>
+  <h2>Result</h2>
+  <p><%=
+    @result.map do |fragment|
+      if fragment.is_a?(Fiddlybits::Charset::DecodedData)
+        fragment.code_point_str
+      elsif fragment.is_a?(Fiddlybits::Charset::RemainingData)
+        '(error!)' # TODO CSS
+      else
+        ''
+      end
+    end.join
+  %></p>
+
+  <h2>Detailed Result</h2>
+  <table>
+    <thead>
+      <th>Bytes</th>
+      <th>Meaning</th>
+    </thead>
+    <tbody>
+      <% @result.each do |fragment| %>
+        <tr>
+          <td><%= fragment.bytes %></td>
+          <% if fragment.is_a?(Fiddlybits::Charset::DecodedData) %>
+            <td>U+<%= fragment.code_point %> : &#<%= fragment.code_point %>; (<%= fragment.explanation %>)</td>
+          <% elsif fragment.is_a?(Fiddlybits::Charset::EscapeSequence) %>
+            <td><%= fragment.code %> (<%= fragment.explanation %>)</td>
+          <% else %>
+            <td>cannot decode</td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
