@@ -16,7 +16,7 @@ namespace :deploy do
 
   desc 'Restart application'
   task :restart do
-    invoke 'unicorn:reload'
+    invoke 'unicorn:restart'
   end
 
   after :publishing, :restart
