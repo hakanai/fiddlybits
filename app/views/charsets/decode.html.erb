@@ -45,7 +45,7 @@
         <tr>
           <td><%= fragment.bytes %></td>
           <% if fragment.is_a?(Fiddlybits::Charset::DecodedData) %>
-            <td>U+<%= fragment.code_point %> : &#<%= fragment.code_point %>; (<%= fragment.explanation %>)</td>
+            <td>U+<%= fragment.code_point %> : <%= fragment.code_point_str %> (<%= fragment.explanation %>)</td>
           <% elsif fragment.is_a?(Fiddlybits::Charset::EscapeSequence) %>
             <td><%= fragment.code %> (<%= fragment.explanation %>)</td>
           <% else %>
