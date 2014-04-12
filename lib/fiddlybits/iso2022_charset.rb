@@ -9,7 +9,6 @@ module Fiddlybits
       decoded_fragments = []
       next_charset = Charset::US_ASCII
       while esc = bytes.find_index(0x1b)
-        puts "esc = #{esc}"
         decoded_fragments += next_charset.decode(bytes[0...esc])
         bytes = bytes[esc..-1]
 

@@ -32,6 +32,11 @@ module Fiddlybits
             # assumed to be an array, back around the loop
           end
         end
+        if node.is_a?(Array)
+          # incomplete sequence
+          decoded_fragments << RemainingData.new(bytes)
+          bytes.clear
+        end
       end
       decoded_fragments
     end
