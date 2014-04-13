@@ -61,7 +61,9 @@ module Fiddlybits
     JISX0201_1976 = TableCharset.new_from_ucm_file('JIS X 0201-1976', "#{data}/charsets/ucm/ibm-897_P100-1995.ucm")
     JISX0208_1978_0 = TableCharset.new_from_ucm_file('JIS X 0208-1978', "#{data}/charsets/ucm/ibm-955_P110-1997.ucm")
     JISX0208_1983_0 = TableCharset.new_from_ucm_file('JIS X 0208-1983', "#{data}/charsets/ucm/aix-JISX0208.1983_0-4.3.6.ucm")
-    ISO_2022_JP = Iso2022Charset.new('ISO-2022-JP')
+    JISX0212_1990 = TableCharset.new_from_ucm_file('JIS X 0212-1990', "#{data}/charsets/ucm/ibm-953_P100-2000.ucm")
+    ISO_2022_JP = Iso2022Charset::ISO_2022_JP
+    ISO_2022_JP_1 = Iso2022Charset::ISO_2022_JP_1
 
     # Gets an array containing all known charsets.
     def self.all
