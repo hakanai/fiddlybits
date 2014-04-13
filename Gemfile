@@ -45,5 +45,7 @@ gem 'capistrano-bundler', '~> 1.1.2', group: :development
 # Use debugger
 gem 'debugger', group: [:development, :test]
 
+# Application stuff
+gem 'unicode_utils'
 gem 'hamster'
 

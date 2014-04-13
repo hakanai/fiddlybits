@@ -39,17 +39,21 @@
     <thead>
       <th>Bytes</th>
       <th>Meaning</th>
+      <th>Method</th>
     </thead>
     <tbody>
       <% @result.each do |fragment| %>
         <tr>
           <td><%= fragment.bytes %></td>
           <% if fragment.is_a?(Fiddlybits::Charset::DecodedData) %>
-            <td>U+<%= fragment.code_point %> : <%= fragment.code_point_str %> (<%= fragment.explanation %>)</td>
+            <% code_point = UnicodeUtils::Codepoint.new(fragment.code_point) -%>
+            <td><%= code_point.uplus %> <%= code_point.name %></td>
+            <td><%= fragment.explanation %></td>
           <% elsif fragment.is_a?(Fiddlybits::Charset::EscapeSequence) %>
-            <td><%= fragment.code %> (<%= fragment.explanation %>)</td>
+            <td><%= fragment.code %></td>
+            <td><%= fragment.explanation %></td>
           <% else %>
-            <td>cannot decode</td>
+            <td colspan="2">cannot decode</td>
           <% end %>
         </tr>
       <% end %>
