@@ -59,7 +59,7 @@ module Fiddlybits
             # <U00D7>  \x21\x5F |0
             if line =~ /<U(.*?)>\s+(\\x\S+)\s+|(\d)/
               code_point = $1.hex
-              tmp = $2.gsub(/\\x/, '')
+              bytes = [$2.gsub(/\\x/, '')].pack('H*').bytes
               type = $3.to_i
 
               # We can use types 0 and 3:
@@ -69,14 +69,7 @@ module Fiddlybits
               # type 3 = reverse fallback mapping only from codepage to Unicode but not back
               # type 4 = good one-way mapping from Unicode to the codepage but not back
               if type == 0 || type == 3
-                bytes = [tmp].pack('H*').bytes
-
-                node = root
-                bytes[0..-2].each do |b|
-                  node = (node[b] ||= [])
-                end
-
-                node[bytes[-1]] = code_point
+                add_to_table(root, bytes, code_point)
               end
             end
           end
@@ -84,6 +77,35 @@ module Fiddlybits
       end
 
       new(name, root)
+    end
+
+    # Reads a file containing character mappings in the legacy text format Unicode use.
+    # Maybe they use it for new character mappings too, but I haven't seen any new ones yet
+    # and I'm just assuming they would use the XML format these days.
+    def self.new_from_legacy_txt_file(name, file)
+      root = []
+      File.readlines(file).each do |line|
+        line.gsub!(/#.*$/, '').strip!
+        next if line.empty?
+        
+        # Lines look like this:
+        # 0x2131  0x201D  # RIGHT DOUBLE QUOTATION MARK
+        if line =~ /^0x(\S+)\s+0x(\S+)/
+          bytes = [$1].pack('H*').bytes
+          code_point = $2.hex
+          add_to_table(root, bytes, code_point)
+        end
+      end
+      new(name, root)
+    end
+
+    def self.add_to_table(root, bytes, code_point)
+      node = root
+      bytes[0..-2].each do |b|
+        node = (node[b] ||= [])
+      end
+
+      node[bytes[-1]] = code_point
     end
   end
 end

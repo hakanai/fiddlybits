@@ -58,12 +58,21 @@ module Fiddlybits
     #TODO: All these objects should be immutable including the arrays inside.
     #TODO: We probably shouldn't be loading this up-front once the collection gets bigger.
     US_ASCII = AsciiCharset.new
+
+    ISO8859_1 = TableCharset.new_from_legacy_txt_file('ISO-8859-1', "#{data}/charsets/txt/iso-8859-1-1998.txt")
+    ISO8859_7 = TableCharset.new_from_legacy_txt_file('ISO-8859-7', "#{data}/charsets/txt/iso-8859-7-2003.txt")
+    GB2312_1980 = TableCharset.new_from_ucm_file('GB 2312-1980', "#{data}/charsets/ucm/ibm-5478_P100-1995.ucm")
     JISX0201_1976 = TableCharset.new_from_ucm_file('JIS X 0201-1976', "#{data}/charsets/ucm/ibm-897_P100-1995.ucm")
     JISX0208_1978_0 = TableCharset.new_from_ucm_file('JIS X 0208-1978', "#{data}/charsets/ucm/ibm-955_P110-1997.ucm")
     JISX0208_1983_0 = TableCharset.new_from_ucm_file('JIS X 0208-1983', "#{data}/charsets/ucm/aix-JISX0208.1983_0-4.3.6.ucm")
-    JISX0212_1990 = TableCharset.new_from_ucm_file('JIS X 0212-1990', "#{data}/charsets/ucm/ibm-953_P100-2000.ucm")
+    JISX0212_1990 = TableCharset.new_from_ucm_file('JIS X 0212-1990', "#{data}/charsets/ucm/jisx-0212-1990.ucm")
+    KSX1001_1992 = TableCharset.new_from_legacy_txt_file('KS X 1001-1992', "#{data}/charsets/txt/ksx1001-1992.txt")
+
     ISO_2022_JP = Iso2022Charset::ISO_2022_JP
     ISO_2022_JP_1 = Iso2022Charset::ISO_2022_JP_1
+    ISO_2022_JP_2 = Iso2022Charset::ISO_2022_JP_2
+
+
 
     # Gets an array containing all known charsets.
     def self.all
