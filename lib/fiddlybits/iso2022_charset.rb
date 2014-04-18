@@ -95,21 +95,28 @@ module Fiddlybits
     end
 
     ISO_2022_JP = Iso2022Charset.new('ISO-2022-JP', {
-      "\e(B" => [ Charset::US_ASCII,        :g0 ],
-      "\e(J" => [ Charset::JISX0201_1976,   :g0 ],
-      "\e$@" => [ Charset::JISX0208_1978_0, :g0 ],
-      "\e$B" => [ Charset::JISX0208_1983_0, :g0 ]
+      "\e(B" => [ Charset::US_ASCII,              :g0 ],
+      "\e(J" => [ Charset::JISX0201_1976_ROMAN,   :g0 ],
+      "\e$@" => [ Charset::JISX0208_1978_0,       :g0 ],
+      "\e$B" => [ Charset::JISX0208_1983_0,       :g0 ]
       })
 
     ISO_2022_JP_1 = ISO_2022_JP.new_extension('ISO-2022-JP-1', {
-      "\e$(D" => [ Charset::JISX0212_1990,   :g0 ]
+      "\e$(D" => [ Charset::JISX0212_1990,        :g0 ]
       })
 
     ISO_2022_JP_2 = ISO_2022_JP_1.new_extension('ISO-2022-JP-2', {
-      "\e$A"  => [ Charset::GB2312_1980,     :g0 ],
-      "\e$(C" => [ Charset::KSX1001_1992,    :g0 ],
+      "\e$A"  => [ Charset::GB2312_1980,          :g0 ],
+      "\e$(C" => [ Charset::KSX1001_1992,         :g0 ],
       "\e.A"  => [ HighPartOnlyCharset.new('ISO-8859-1 high part', Charset::ISO8859_1), :g2 ],
       "\e.F"  => [ HighPartOnlyCharset.new('ISO-8859-7 high part', Charset::ISO8859_7), :g2 ]
+      })
+
+    # Note: this is not derived from ISO-2022-JP-2 as one might expect.
+    ISO_2022_JP_3 = ISO_2022_JP.new_extension('ISO-2022-JP-3', {
+      "\e(I"  => [ Charset::JISX0201_1976_KANA,   :g0 ],
+      "\e$(O" => [ Charset::JISX0213_2000_PLANE1, :g0 ],
+      "\e$(P" => [ Charset::JISX0213_2000_PLANE2, :g0 ]
       })
 
   end

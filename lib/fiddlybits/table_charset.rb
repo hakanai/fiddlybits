@@ -85,7 +85,8 @@ module Fiddlybits
     def self.new_from_legacy_txt_file(name, file)
       root = []
       File.readlines(file).each do |line|
-        line.gsub!(/#.*$/, '').strip!
+        line.gsub!(/#.*$/, '')
+        line.strip!
         next if line.empty?
         
         # Lines look like this:
