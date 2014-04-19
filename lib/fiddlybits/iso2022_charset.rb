@@ -119,5 +119,8 @@ module Fiddlybits
       "\e$(P" => [ Charset::JISX0213_2000_PLANE2, :g0 ]
       })
 
+    ISO_2022_JP_2004 = ISO_2022_JP_3.new_extension('ISO-2022-JP-2004', {
+      "\e$(Q" => [ Charset::JISX0213_2004,        :g0 ]
+      })
   end
 end

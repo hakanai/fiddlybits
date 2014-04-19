@@ -25,7 +25,7 @@
   <p><%=
     @result.map do |fragment|
       if fragment.is_a?(Fiddlybits::Charset::DecodedData)
-        fragment.code_point_str
+        fragment.string
       elsif fragment.is_a?(Fiddlybits::Charset::RemainingData)
         '(error!)' # TODO CSS
       else
@@ -46,8 +46,13 @@
         <tr>
           <td><%= fragment.bytes %></td>
           <% if fragment.is_a?(Fiddlybits::Charset::DecodedData) %>
-            <% code_point = UnicodeUtils::Codepoint.new(fragment.code_point) -%>
-            <td><%= code_point.uplus %> <%= code_point.name %></td>
+            <td>
+              <% fragment.string.codepoints.each_with_index do |cp, index| -%>
+                <% if index > 0 %><br/><% end %>
+                <% code_point = UnicodeUtils::Codepoint.new(cp) -%>
+                <%= code_point.uplus %> <%= code_point.name %>
+              <% end %>
+            </td>
             <td><%= fragment.explanation %></td>
           <% elsif fragment.is_a?(Fiddlybits::Charset::EscapeSequence) %>
             <td><%= fragment.code %></td>

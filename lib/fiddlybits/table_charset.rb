@@ -17,19 +17,21 @@ module Fiddlybits
         (0...bytes.size).each do |i|
           b = bytes[i]
           node = node[b] # todo rewrite this bit in proper OO
-          if node.is_a?(Integer)
+          if node.is_a?(String)
             # terminal node
             decoded_bytes = bytes[0..i]
             decoded_fragments << DecodedData.new(decoded_bytes, node, 'table lookup')
             bytes = bytes[i+1..-1]
             break
+          elsif node.is_a?(Array)
+            # back around 
           elsif node.nil?
             # invalid sequence
             decoded_fragments << RemainingData.new(bytes)
             bytes.clear
             break
           else
-            # assumed to be an array, back around the loop
+            raise "Unexpected node: #{node} of type: #{node.class}"
           end
         end
         if node.is_a?(Array)
@@ -58,7 +60,7 @@ module Fiddlybits
             # Lines look like this:
             # <U00D7>  \x21\x5F |0
             if line =~ /<U(.*?)>\s+(\\x\S+)\s+|(\d)/
-              code_point = $1.hex
+              string = [$1.hex].pack('U*')
               bytes = [$2.gsub(/\\x/, '')].pack('H*').bytes
               type = $3.to_i
 
@@ -69,7 +71,7 @@ module Fiddlybits
               # type 3 = reverse fallback mapping only from codepage to Unicode but not back
               # type 4 = good one-way mapping from Unicode to the codepage but not back
               if type == 0 || type == 3
-                add_to_table(root, bytes, code_point)
+                add_to_table(root, bytes, string)
               end
             end
           end
@@ -91,22 +93,25 @@ module Fiddlybits
         
         # Lines look like this:
         # 0x2131  0x201D  # RIGHT DOUBLE QUOTATION MARK
-        if line =~ /^0x(\S+)\s+0x(\S+)/
+        # 0x2131  0x201D  # RIGHT DOUBLE QUOTATION MARK
+        # If a mapping maps to multiple code points:
+        # 0x2477  0x304B+309A
+        if line =~ /^0x(\S+)\s+0x(\S+(?:\+\S+)*)/
           bytes = [$1].pack('H*').bytes
-          code_point = $2.hex
-          add_to_table(root, bytes, code_point)
+          string = $2.split(/\+/).map{|h| h.hex}.pack('U*')
+          add_to_table(root, bytes, string)
         end
       end
       new(name, root)
     end
 
-    def self.add_to_table(root, bytes, code_point)
+    def self.add_to_table(root, bytes, string)
       node = root
       bytes[0..-2].each do |b|
         node = (node[b] ||= [])
       end
 
-      node[bytes[-1]] = code_point
+      node[bytes[-1]] = string
     end
   end
 end

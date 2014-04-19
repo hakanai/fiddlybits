@@ -4,17 +4,13 @@ module Fiddlybits
     # Result object indicating successfully-decoded data.
     class DecodedData
       attr_reader :bytes
-      attr_reader :code_point
+      attr_reader :string
       attr_reader :explanation
 
-      def initialize(bytes, code_point, explanation)
+      def initialize(bytes, string, explanation)
         @bytes = bytes.dup
-        @code_point = code_point
+        @string = string
         @explanation = explanation
-      end
-
-      def code_point_str
-        [code_point].pack("U")
       end
     end
 
@@ -69,12 +65,14 @@ module Fiddlybits
     JISX0212_1990 = TableCharset.new_from_ucm_file('JIS X 0212-1990', "#{data}/charsets/ucm/jisx-0212-1990.ucm")
     JISX0213_2000_PLANE1 = TableCharset.new_from_legacy_txt_file('JIS X 0213-2000 plane 1', "#{data}/charsets/txt/jisx-0213-2000-plane1.txt")
     JISX0213_2000_PLANE2 = TableCharset.new_from_legacy_txt_file('JIS X 0213-2000 plane 2', "#{data}/charsets/txt/jisx-0213-2000-plane2.txt")
+    JISX0213_2004 = TableCharset.new_from_legacy_txt_file('JIS X 0213-2004', "#{data}/charsets/txt/jisx-0213-2004.txt")
     KSX1001_1992 = TableCharset.new_from_legacy_txt_file('KS X 1001-1992', "#{data}/charsets/txt/ksx1001-1992.txt")
 
     ISO_2022_JP = Iso2022Charset::ISO_2022_JP
     ISO_2022_JP_1 = Iso2022Charset::ISO_2022_JP_1
     ISO_2022_JP_2 = Iso2022Charset::ISO_2022_JP_2
     ISO_2022_JP_3 = Iso2022Charset::ISO_2022_JP_3
+    ISO_2022_JP_2004 = Iso2022Charset::ISO_2022_JP_2004
 
 
 
