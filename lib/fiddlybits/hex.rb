@@ -6,23 +6,20 @@ module Fiddlybits
       [ hex_string.scan(/\b[0-9a-fA-F]{2}\b/).join ].pack('H*')
     end
 
-    #TODO The other direction
-    # def self.binary_to_hex(binary)
-    #   ascii = ''
-    #   counter = 0
-    #   binary.each_byte do |b|
-    #     if counter >= start
-    #       print '%02x ' % b
-    #       ascii << (b.between?(32, 126) ? b : '.')
-    #       if ascii.length >= WIDTH
-    #         puts ascii 
-    #         ascii = ''
-    #       end
-    #     end
-    #     break if finish && finish <= counter
-    #     counter += 1
-    #   end
-    #   puts '   ' * (WIDTH - ascii.length) + ascii
-    # end
+    def self.binary_to_hex(binary)
+      result = ''
+      ascii = ''
+      counter = 0
+      binary.each_byte do |b|
+        result << ('%02x ' % b)
+        ascii << (b.between?(32, 126) ? b : '.')
+        if ascii.length >= WIDTH
+          result << (' ' + ascii)
+          ascii = ''
+        end
+        counter += 1
+      end
+      result << (('   ' * (WIDTH - ascii.length)) + ' ' + ascii)
+    end
   end
 end

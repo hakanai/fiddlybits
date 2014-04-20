@@ -1,0 +1,26 @@
+<%= form_for(:form, method: 'GET') do |f| %>
+  <p>
+    Data to decode:<br/>
+    <%= f.text_area(:data, rows: 16, cols: 60) %>
+  </p>
+
+  <p>
+    Decode using encoding:
+    <%= f.collection_select(:encoding, @encodings, :name, :name) %>
+  </p>
+
+  <p>
+    Show result as:
+    <label><%= f.radio_button(:type, 'text') %>Text (UTF-8)</label>
+    <label><%= f.radio_button(:type, 'hex') %>Binary as Hex</label>
+  </p>
+
+  <p>
+    <%= f.submit('Submit') %>
+  </p>
+<% end %>
+
+<% if @result %>
+  <p>Result:</p>
+  <pre><%= @result %></pre>
+<% end %>
