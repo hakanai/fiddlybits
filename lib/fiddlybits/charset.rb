@@ -73,6 +73,7 @@ module Fiddlybits
     ISO_2022_JP_2 = Iso2022Charset::ISO_2022_JP_2
     ISO_2022_JP_3 = Iso2022Charset::ISO_2022_JP_3
     ISO_2022_JP_2004 = Iso2022Charset::ISO_2022_JP_2004
+    ISO_2022_KR = Iso2022Charset::ISO_2022_KR
 
 
 

@@ -14,5 +14,8 @@ module Fiddlybits
         end
       end
     end
+
+    def min_bytes_per_char; 1; end
+    def max_bytes_per_char; 1; end
   end
 end

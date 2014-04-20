@@ -1,8 +1,13 @@
 module Fiddlybits
   class TableCharset < Charset
-    def initialize(name, root)
+    attr_reader :min_bytes_per_char
+    attr_reader :max_bytes_per_char
+
+    def initialize(name, root, min_bytes_per_char, max_bytes_per_char)
       super(name)
       @root = root
+      @min_bytes_per_char = min_bytes_per_char
+      @max_bytes_per_char = max_bytes_per_char
     end
 
     # Decodes the given string as binary data, returning a structure explaining how it was done.
@@ -47,6 +52,8 @@ module Fiddlybits
     def self.new_from_ucm_file(name, file)
       in_charset = false
       root = []
+      min_bytes_per_char = 1000
+      max_bytes_per_char = 0
       File.readlines(file).each do |line|
         line.strip!
         next if line.starts_with?('#')
@@ -64,6 +71,9 @@ module Fiddlybits
               bytes = [$2.gsub(/\\x/, '')].pack('H*').bytes
               type = $3.to_i
 
+              min_bytes_per_char = [min_bytes_per_char, bytes.size].min
+              max_bytes_per_char = [max_bytes_per_char, bytes.size].max
+
               # We can use types 0 and 3:
               # type 0 = normal round-trip mapping
               # type 1 = fallback mapping from Unicode to the codepage but not back
@@ -78,7 +88,7 @@ module Fiddlybits
         end
       end
 
-      new(name, root)
+      new(name, root, min_bytes_per_char, max_bytes_per_char)
     end
 
     # Reads a file containing character mappings in the legacy text format Unicode use.
@@ -86,6 +96,9 @@ module Fiddlybits
     # and I'm just assuming they would use the XML format these days.
     def self.new_from_legacy_txt_file(name, file)
       root = []
+      min_bytes_per_char = 1000
+      max_bytes_per_char = 0
+
       File.readlines(file).each do |line|
         line.gsub!(/#.*$/, '')
         line.strip!
@@ -99,10 +112,14 @@ module Fiddlybits
         if line =~ /^0x(\S+)\s+0x(\S+(?:\+\S+)*)/
           bytes = [$1].pack('H*').bytes
           string = $2.split(/\+/).map{|h| h.hex}.pack('U*')
+
+          min_bytes_per_char = [min_bytes_per_char, bytes.size].min
+          max_bytes_per_char = [max_bytes_per_char, bytes.size].max
+
           add_to_table(root, bytes, string)
         end
       end
-      new(name, root)
+      new(name, root, min_bytes_per_char, max_bytes_per_char)
     end
 
     def self.add_to_table(root, bytes, string)
