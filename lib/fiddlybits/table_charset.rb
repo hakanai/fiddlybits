@@ -130,5 +130,28 @@ module Fiddlybits
 
       node[bytes[-1]] = string
     end
+
+    #TODO: I really want a better place to put all the data.
+    data = File.realpath(File.join(File.dirname(__FILE__), '../../data'))
+
+    #TODO: More charsets
+    # Here's where ICU's list of mappings from various names is:
+    # http://source.icu-project.org/repos/icu/icu/trunk/source/data/mappings/convrtrs.txt
+
+    #TODO: All these objects should be immutable including the arrays inside.
+    #TODO: We probably shouldn't be loading this up-front once the collection gets bigger.
+
+    ISO8859_1 = self.new_from_legacy_txt_file('ISO-8859-1', "#{data}/charsets/txt/iso-8859-1-1998.txt")
+    ISO8859_7 = self.new_from_legacy_txt_file('ISO-8859-7', "#{data}/charsets/txt/iso-8859-7-2003.txt")
+    GB2312_1980 = self.new_from_ucm_file('GB 2312-1980', "#{data}/charsets/ucm/ibm-5478_P100-1995.ucm")
+    JISX0201_1976_ROMAN = self.new_from_legacy_txt_file('JIS X 0201-1976 roman', "#{data}/charsets/txt/jisx-0201-1976-roman.txt")
+    JISX0201_1976_KANA = self.new_from_legacy_txt_file('JIS X 0201-1976 kana', "#{data}/charsets/txt/jisx-0201-1976-kana.txt")
+    JISX0208_1978_0 = self.new_from_ucm_file('JIS X 0208-1978', "#{data}/charsets/ucm/ibm-955_P110-1997.ucm")
+    JISX0208_1983_0 = self.new_from_ucm_file('JIS X 0208-1983', "#{data}/charsets/ucm/aix-JISX0208.1983_0-4.3.6.ucm")
+    JISX0212_1990 = self.new_from_ucm_file('JIS X 0212-1990', "#{data}/charsets/ucm/jisx-0212-1990.ucm")
+    JISX0213_2000_PLANE1 = self.new_from_legacy_txt_file('JIS X 0213-2000 plane 1', "#{data}/charsets/txt/jisx-0213-2000-plane1.txt")
+    JISX0213_2000_PLANE2 = self.new_from_legacy_txt_file('JIS X 0213-2000 plane 2', "#{data}/charsets/txt/jisx-0213-2000-plane2.txt")
+    JISX0213_2004 = self.new_from_legacy_txt_file('JIS X 0213-2004', "#{data}/charsets/txt/jisx-0213-2004.txt")
+    KSX1001_1992 = self.new_from_legacy_txt_file('KS X 1001-1992', "#{data}/charsets/txt/ksx1001-1992.txt")
   end
 end

@@ -17,5 +17,7 @@ module Fiddlybits
 
     def min_bytes_per_char; 1; end
     def max_bytes_per_char; 1; end
+
+    US_ASCII = AsciiCharset.new
   end
 end
