@@ -27,6 +27,7 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.2)
     atomic (1.1.15)
+    base32 (0.3.2)
     builder (3.1.4)
     capistrano (3.1.0)
       i18n
@@ -153,6 +154,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  base32
   capistrano
   capistrano-bundler (~> 1.1.2)
   capistrano-rails (~> 1.1)

@@ -9,13 +9,13 @@ class EncodingsController < ApplicationController
     @form.type ||= 'text'
 
     data = @form.data
-    if @form.type == 'hex'
+    if data && @form.type == 'hex'
       data = Fiddlybits::Hex.hex_to_binary(data)
     end
 
-    if !@form.data.blank? && !@form.encoding.blank?
+    if !data.blank? && !@form.encoding.blank?
       @encoding = Fiddlybits::Encoding.find_by_name(@form.encoding) || (redirect_to(root_path); return)
-      @result = @form.data.blank? ? nil : @encoding.encode.call(data)
+      @result = @form.data.blank? ? nil : @encoding.encode(data)
     end
   end
 
@@ -28,7 +28,12 @@ class EncodingsController < ApplicationController
 
     if !@form.data.blank? && !@form.encoding.blank?
       @encoding = Fiddlybits::Encoding.find_by_name(@form.encoding) || (redirect_to(root_path); return)
-      @result = @form.data.blank? ? nil : @encoding.decode.call(@form.data)
+      begin
+        @result = @encoding.decode(@form.data)
+      rescue Fiddlybits::InvalidEncoding => e
+        flash[:error] = "Cannot decode that data using #{@encoding.human_name}!"
+        return
+      end
   
       if @form.type == 'hex'
         @result = Fiddlybits::Hex.binary_to_hex(@result)

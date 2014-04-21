@@ -5,8 +5,8 @@
   </p>
 
   <p>
-    Decode using encoding:
-    <%= f.collection_select(:encoding, @encodings, :name, :name) %>
+    Decode as:
+    <%= f.collection_select(:encoding, @encodings, :name, :human_name) %>
   </p>
 
   <p>

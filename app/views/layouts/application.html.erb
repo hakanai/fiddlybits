@@ -9,6 +9,12 @@
   <body>
     <p><%= link_to 'Back to Top', :controller => 'welcome' %></p>
 
+    <% if flash[:error] -%>
+      <div class="error">
+        <p><%= flash[:error] %></p>
+      </div>
+    <% end -%>
+
     <%= yield %>
   </body>
 </html>
