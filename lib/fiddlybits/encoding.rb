@@ -21,7 +21,10 @@ module Fiddlybits
     def self.find_all
       if !@all
         all = []
-        [ Base16Encoding, Base32Encoding, Base64Encoding, Ascii85Encoding ].each do |cls|
+        [ Base16Encoding, Base32Encoding, Base64Encoding,
+          Ascii85Encoding,
+          UuencodeEncoding, QuotedPrintableEncoding
+        ].each do |cls|
           all += cls.constants.sort.map { |c| cls.const_get(c) }.select { |v| v.is_a?(Encoding) }
         end
         all.sort_by! { |cs| cs.name }

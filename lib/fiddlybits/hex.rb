@@ -14,7 +14,7 @@ module Fiddlybits
         result << ('%02x ' % b)
         ascii << (b.between?(32, 126) ? b : '.')
         if ascii.length >= WIDTH
-          result << (' ' + ascii)
+          result << (' ' + ascii + "\n")
           ascii = ''
         end
         counter += 1
