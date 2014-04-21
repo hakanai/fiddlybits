@@ -47,6 +47,7 @@ gem 'debugger', group: [:development, :test]
 
 # Application stuff
 gem 'unicode_utils'
+gem 'Ascii85'
 gem 'base32'
 gem 'hamster'
 

@@ -9,7 +9,7 @@ class EncodingsController < ApplicationController
     @form.type ||= 'text'
 
     data = @form.data
-    if data && @form.type == 'hex'
+    if !data.blank? && @form.type == 'hex'
       data = Fiddlybits::Hex.hex_to_binary(data)
     end
 

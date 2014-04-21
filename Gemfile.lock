@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    Ascii85 (1.0.2)
     actionmailer (4.0.4)
       actionpack (= 4.0.4)
       mail (~> 2.5.4)
@@ -154,6 +155,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  Ascii85
   base32
   capistrano
   capistrano-bundler (~> 1.1.2)
