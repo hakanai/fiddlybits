@@ -91,10 +91,8 @@ module Fiddlybits
       new(name, root, min_bytes_per_char, max_bytes_per_char)
     end
 
-    # Reads a file containing character mappings in the legacy text format Unicode use.
-    # Maybe they use it for new character mappings too, but I haven't seen any new ones yet
-    # and I'm just assuming they would use the XML format these days.
-    def self.new_from_legacy_txt_file(name, file)
+    # Reads a file containing character mappings in the plain text format Unicode use.
+    def self.new_from_txt_file(name, file)
       root = []
       min_bytes_per_char = 1000
       max_bytes_per_char = 0
@@ -132,7 +130,7 @@ module Fiddlybits
     end
 
     #TODO: I really want a better place to put all the data.
-    data = File.realpath(File.join(File.dirname(__FILE__), '../../data'))
+    charsets_data = File.realpath(File.join(File.dirname(__FILE__), '../../data/charsets'))
 
     #TODO: More charsets
     # Here's where ICU's list of mappings from various names is:
@@ -141,17 +139,30 @@ module Fiddlybits
     #TODO: All these objects should be immutable including the arrays inside.
     #TODO: We probably shouldn't be loading this up-front once the collection gets bigger.
 
-    ISO8859_1 = self.new_from_legacy_txt_file('ISO-8859-1', "#{data}/charsets/txt/iso-8859-1-1998.txt")
-    ISO8859_7 = self.new_from_legacy_txt_file('ISO-8859-7', "#{data}/charsets/txt/iso-8859-7-2003.txt")
-    GB2312_1980 = self.new_from_ucm_file('GB 2312-1980', "#{data}/charsets/ucm/ibm-5478_P100-1995.ucm")
-    JISX0201_1976_ROMAN = self.new_from_legacy_txt_file('JIS X 0201-1976 roman', "#{data}/charsets/txt/jisx-0201-1976-roman.txt")
-    JISX0201_1976_KANA = self.new_from_legacy_txt_file('JIS X 0201-1976 kana', "#{data}/charsets/txt/jisx-0201-1976-kana.txt")
-    JISX0208_1978_0 = self.new_from_ucm_file('JIS X 0208-1978', "#{data}/charsets/ucm/ibm-955_P110-1997.ucm")
-    JISX0208_1983_0 = self.new_from_ucm_file('JIS X 0208-1983', "#{data}/charsets/ucm/aix-JISX0208.1983_0-4.3.6.ucm")
-    JISX0212_1990 = self.new_from_ucm_file('JIS X 0212-1990', "#{data}/charsets/ucm/jisx-0212-1990.ucm")
-    JISX0213_2000_PLANE1 = self.new_from_legacy_txt_file('JIS X 0213-2000 plane 1', "#{data}/charsets/txt/jisx-0213-2000-plane1.txt")
-    JISX0213_2000_PLANE2 = self.new_from_legacy_txt_file('JIS X 0213-2000 plane 2', "#{data}/charsets/txt/jisx-0213-2000-plane2.txt")
-    JISX0213_2004 = self.new_from_legacy_txt_file('JIS X 0213-2004', "#{data}/charsets/txt/jisx-0213-2004.txt")
-    KSX1001_1992 = self.new_from_legacy_txt_file('KS X 1001-1992', "#{data}/charsets/txt/ksx1001-1992.txt")
+    File.readlines("#{charsets_data}/mappings.txt").each do |line|
+      line.gsub!(/#.*$/, '')
+      line.strip!
+      next if line.empty?
+
+      if line =~ /^(\S+)\s+(.*)$/
+        path = $1
+        human_name = $2
+
+        const_name = $2.gsub(/[\s\-:]/, '_').upcase.to_sym
+        full_path = File.join(charsets_data, path)
+        TableCharset.const_set(const_name, new_from_txt_file(human_name, full_path))
+      end
+    end
+
+    GB2312_1980 = self.new_from_ucm_file('GB 2312-1980', "#{charsets_data}/ucm/ibm-5478_P100-1995.ucm")
+    JISX0201_1976_ROMAN = self.new_from_txt_file('JIS X 0201-1976 roman', "#{charsets_data}/txt/jisx-0201-1976-roman.txt")
+    JISX0201_1976_KANA = self.new_from_txt_file('JIS X 0201-1976 kana', "#{charsets_data}/txt/jisx-0201-1976-kana.txt")
+    JISX0208_1978_0 = self.new_from_ucm_file('JIS X 0208-1978', "#{charsets_data}/ucm/ibm-955_P110-1997.ucm")
+    JISX0208_1983_0 = self.new_from_ucm_file('JIS X 0208-1983', "#{charsets_data}/ucm/aix-JISX0208.1983_0-4.3.6.ucm")
+    JISX0212_1990 = self.new_from_ucm_file('JIS X 0212-1990', "#{charsets_data}/ucm/jisx-0212-1990.ucm")
+    JISX0213_2000_PLANE1 = self.new_from_txt_file('JIS X 0213-2000 plane 1', "#{charsets_data}/txt/jisx-0213-2000-plane1.txt")
+    JISX0213_2000_PLANE2 = self.new_from_txt_file('JIS X 0213-2000 plane 2', "#{charsets_data}/txt/jisx-0213-2000-plane2.txt")
+    JISX0213_2004 = self.new_from_txt_file('JIS X 0213-2004', "#{charsets_data}/txt/jisx-0213-2004.txt")
+    KSX1001_1992 = self.new_from_txt_file('KS X 1001-1992', "#{charsets_data}/txt/ksx1001-1992.txt")
   end
 end

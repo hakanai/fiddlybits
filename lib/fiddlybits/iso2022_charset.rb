@@ -162,8 +162,8 @@ module Fiddlybits
       {
         "\e$A"  => designate_set(:g0, TableCharset::GB2312_1980),
         "\e$(C" => designate_set(:g0, TableCharset::KSX1001_1992),
-        "\e.A"  => designate_set(:g2, HighPartOnlyCharset.new('ISO-8859-1 high part', TableCharset::ISO8859_1)),
-        "\e.F"  => designate_set(:g2, HighPartOnlyCharset.new('ISO-8859-7 high part', TableCharset::ISO8859_7)),
+        "\e.A"  => designate_set(:g2, HighPartOnlyCharset.new('ISO-8859-1 high part', TableCharset::ISO_8859_1_1998)),
+        "\e.F"  => designate_set(:g2, HighPartOnlyCharset.new('ISO-8859-7 high part', TableCharset::ISO_8859_7_2003)),
         "\eN"   => single_shift(:g2)
       })
 
