@@ -1,17 +1,66 @@
-iso-8859/8859-1-1998.txt	ISO 8859-1:1998
-iso-8859/8859-2-1999.txt	ISO 8859-2:1999
-iso-8859/8859-3-1999.txt	ISO 8859-3:1999
-iso-8859/8859-4-1998.txt	ISO 8859-4:1998
-iso-8859/8859-5-1999.txt	ISO 8859-5:1999
-iso-8859/8859-6-1999.txt	ISO 8859-6:1999
-iso-8859/8859-7-1987a.txt	ISO 8859-7:1987a
-iso-8859/8859-7-1987b.txt	ISO 8859-7:1987b
-iso-8859/8859-7-2003.txt	ISO 8859-7:2003
-iso-8859/8859-8-1999.txt	ISO 8859-8:1999
-iso-8859/8859-9-1999.txt	ISO 8859-9:1999
-iso-8859/8859-10-1998.txt	ISO 8859-10:1998
-iso-8859/8859-11-2001.txt	ISO 8859-11:2001
-iso-8859/8859-13-1998.txt	ISO 8859-13:1998
-iso-8859/8859-14-1998.txt	ISO 8859-14:1998
-iso-8859/8859-15-1999.txt	ISO 8859-15:1999
-iso-8859/8859-16-2001.txt	ISO 8859-16:2001
+
+# For more data:
+# http://www.unicode.org/Public/MAPPINGS/
+
+iso-8859/8859-1-1998.txt		ISO 8859-1:1998
+iso-8859/8859-2-1999.txt		ISO 8859-2:1999
+iso-8859/8859-3-1999.txt		ISO 8859-3:1999
+iso-8859/8859-4-1998.txt		ISO 8859-4:1998
+iso-8859/8859-5-1999.txt		ISO 8859-5:1999
+iso-8859/8859-6-1999.txt		ISO 8859-6:1999
+iso-8859/8859-7-1987a.txt		ISO 8859-7:1987a
+iso-8859/8859-7-1987b.txt		ISO 8859-7:1987b
+iso-8859/8859-7-2003.txt		ISO 8859-7:2003
+iso-8859/8859-8-1999.txt		ISO 8859-8:1999
+iso-8859/8859-9-1999.txt		ISO 8859-9:1999
+iso-8859/8859-10-1998.txt		ISO 8859-10:1998
+iso-8859/8859-11-2001.txt		ISO 8859-11:2001
+iso-8859/8859-13-1998.txt		ISO 8859-13:1998
+iso-8859/8859-14-1998.txt		ISO 8859-14:1998
+iso-8859/8859-15-1999.txt		ISO 8859-15:1999
+iso-8859/8859-16-2001.txt		ISO 8859-16:2001
+
+microsoft/ebcdic/cp037.txt		EBCDIC 037
+microsoft/ebcdic/cp500.txt		EBCDIC 500
+microsoft/ebcdic/cp875.txt		EBCDIC 875
+microsoft/ebcdic/cp1026.txt		EBCDIC 1026
+
+microsoft/mac/cyrillic.txt		MacCyrillic
+microsoft/mac/greek.txt			MacGreek
+microsoft/mac/iceland.txt		MacIcelandic
+microsoft/mac/latin2.txt		MacLatin2
+microsoft/mac/roman.txt			MacRoman
+microsoft/mac/turkish.txt		MacTurkish
+
+microsoft/pc/cp437.txt			MS-DOS 437 (US)
+microsoft/pc/cp720.txt			MS-DOS 720 (Arabic)
+microsoft/pc/cp737.txt			MS-DOS 737 (Greek)
+microsoft/pc/cp775.txt			MS-DOS 775 (Baltic)
+microsoft/pc/cp850.txt			MS-DOS 850 (Multilingual Latin I)
+microsoft/pc/cp852.txt			MS-DOS 852 (Latin II)
+microsoft/pc/cp855.txt			MS-DOS 855 (Cyrillic)
+microsoft/pc/cp857.txt			MS-DOS 857 (Turkish)
+microsoft/pc/cp860.txt			MS-DOS 858 (Multilingual Latin I + Euro)
+microsoft/pc/cp861.txt			MS-DOS 861 (Icelandic)
+microsoft/pc/cp862.txt			MS-DOS 862 (Hebrew)
+microsoft/pc/cp863.txt			MS-DOS 863 (French Canada)
+microsoft/pc/cp864.txt			MS-DOS 864 (Arabic II)
+microsoft/pc/cp865.txt			MS-DOS 865 (Nordic)
+microsoft/pc/cp866.txt			MS-DOS 866 (Russian)
+microsoft/pc/cp869.txt			MS-DOS 869 (Greek II)
+microsoft/pc/cp874.txt			MS-DOS 874 (Thai)
+
+microsoft/windows/cp874.txt		Windows 874 (Thai)
+microsoft/windows/cp932.txt		Windows 932 (Japanese)
+microsoft/windows/cp936.txt		Windows 936 (Simplified Chinese)
+microsoft/windows/cp949.txt		Windows 949 (Korean)
+microsoft/windows/cp950.txt		Windows 950 (Traditional Chinese)
+microsoft/windows/cp1250.txt	Windows 1250 (Central Europe)
+microsoft/windows/cp1251.txt	Windows 1251 (Cyrillic)
+microsoft/windows/cp1252.txt	Windows 1252 (Latin I)
+microsoft/windows/cp1253.txt	Windows 1253 (Greek)
+microsoft/windows/cp1254.txt	Windows 1254 (Turkish)
+microsoft/windows/cp1255.txt	Windows 1255 (Hebrew)
+microsoft/windows/cp1256.txt	Windows 1256 (Arabic)
+microsoft/windows/cp1257.txt	Windows 1257 (Baltic)
+microsoft/windows/cp1258.txt	Windows 1258 (Vietnam)
