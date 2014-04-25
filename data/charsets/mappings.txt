@@ -20,17 +20,53 @@ iso-8859/8859-14-1998.txt		ISO 8859-14:1998
 iso-8859/8859-15-1999.txt		ISO 8859-15:1999
 iso-8859/8859-16-2001.txt		ISO 8859-16:2001
 
+#TODO Some encodings here require inserting Unicode direction symbols
+#     which we can't do with the basic table encoding.
+
+#TODO Some encodings here require branches in the tree where the next byte
+#     might become part of the sequence.
+
+#apple/arabic.txt				Mac OS Arabic
+apple/celtic.txt				Mac OS Celtic
+apple/centeuro.txt				Mac OS Central European
+apple/chinsimp.txt				Mac OS Chinese Simplified
+apple/chintrad.txt				Mac OS Chinese Traditional
+apple/croatian.txt				Mac OS Croatian
+apple/cyrillic.txt				Mac OS Cyrillic
+apple/cyrillic-old.txt			Mac OS Old Cyrillic
+apple/cyrillic-ukr.txt			Mac OS Ukrainian
+#apple/devanaga.txt				Mac OS Devanagari
+apple/dingbats.txt				Mac OS Dingbats
+#apple/farsi.txt				Mac OS Farsi
+apple/gaelic.txt				Mac OS Gaelic
+apple/greek.txt					Mac OS Greek
+#apple/gujarati.txt				Mac OS Gujarati
+#apple/gurmukhi.txt				Mac OS Gurmukhi
+#apple/hebrew.txt				Mac OS Hebrew
+apple/iceland.txt				Mac OS Icelandic
+apple/inuit.txt					Mac OS Inuit
+apple/japanese.txt				Mac OS Japanese
+apple/keyboard.txt				Mac OS Keyboard
+apple/korean.txt				Mac OS Korean
+apple/roman.txt					Mac OS Roman
+apple/romanian.txt				Mac OS Romanian
+apple/symbol.txt				Mac OS Symbol
+apple/thai.txt					Mac OS Thai
+apple/turkish.txt				Mac OS Turkish
+apple/ukraine.txt				Mac OS Ukraine
+
+
 microsoft/ebcdic/cp037.txt		EBCDIC 037
 microsoft/ebcdic/cp500.txt		EBCDIC 500
 microsoft/ebcdic/cp875.txt		EBCDIC 875
 microsoft/ebcdic/cp1026.txt		EBCDIC 1026
 
-microsoft/mac/cyrillic.txt		MacCyrillic
-microsoft/mac/greek.txt			MacGreek
-microsoft/mac/icelandic.txt		MacIcelandic
+#microsoft/mac/cyrillic.txt		MacCyrillic
+#microsoft/mac/greek.txt		MacGreek
+#microsoft/mac/icelandic.txt	MacIcelandic
 microsoft/mac/latin2.txt		MacLatin2
-microsoft/mac/roman.txt			MacRoman
-microsoft/mac/turkish.txt		MacTurkish
+#microsoft/mac/roman.txt		MacRoman
+#microsoft/mac/turkish.txt		MacTurkish
 
 microsoft/pc/cp437.txt			MS-DOS 437 (US)
 microsoft/pc/cp720.txt			MS-DOS 720 (Arabic)
