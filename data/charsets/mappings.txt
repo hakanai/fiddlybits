@@ -64,7 +64,7 @@ microsoft/ebcdic/cp1026.txt		EBCDIC 1026
 #microsoft/mac/cyrillic.txt		MacCyrillic
 #microsoft/mac/greek.txt		MacGreek
 #microsoft/mac/icelandic.txt	MacIcelandic
-microsoft/mac/latin2.txt		MacLatin2
+#microsoft/mac/latin2.txt		MacLatin2
 #microsoft/mac/roman.txt		MacRoman
 #microsoft/mac/turkish.txt		MacTurkish
 
