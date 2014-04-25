@@ -107,7 +107,7 @@ module Fiddlybits
         # 0x2131  0x201D  # RIGHT DOUBLE QUOTATION MARK
         # If a mapping maps to multiple code points:
         # 0x2477  0x304B+309A
-        if line =~ /^0x(\S+)\s+0x(\S+(?:\+\S+)*)/
+        if line =~ /^0x([0-9a-fA-F]{2}+)\s+(0x[0-9a-fA-F]{4,}(?:\+0x[0-9a-fA-F]{4,}+)*)$/
           bytes = [$1].pack('H*').bytes
           string = $2.split(/\+/).map{|h| h.hex}.pack('U*')
 
