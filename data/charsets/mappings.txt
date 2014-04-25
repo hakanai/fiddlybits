@@ -23,9 +23,6 @@ iso-8859/8859-16-2001.txt		ISO 8859-16:2001
 #TODO Some encodings here require inserting Unicode direction symbols
 #     which we can't do with the basic table encoding.
 
-#TODO Some encodings here require branches in the tree where the next byte
-#     might become part of the sequence.
-
 #apple/arabic.txt				Mac OS Arabic
 apple/celtic.txt				Mac OS Celtic
 apple/centeuro.txt				Mac OS Central European
@@ -35,13 +32,13 @@ apple/croatian.txt				Mac OS Croatian
 apple/cyrillic.txt				Mac OS Cyrillic
 apple/cyrillic-old.txt			Mac OS Old Cyrillic
 apple/cyrillic-ukr.txt			Mac OS Ukrainian
-#apple/devanaga.txt				Mac OS Devanagari
+apple/devanaga.txt				Mac OS Devanagari
 apple/dingbats.txt				Mac OS Dingbats
 #apple/farsi.txt				Mac OS Farsi
 apple/gaelic.txt				Mac OS Gaelic
 apple/greek.txt					Mac OS Greek
-#apple/gujarati.txt				Mac OS Gujarati
-#apple/gurmukhi.txt				Mac OS Gurmukhi
+apple/gujarati.txt				Mac OS Gujarati
+apple/gurmukhi.txt				Mac OS Gurmukhi
 #apple/hebrew.txt				Mac OS Hebrew
 apple/iceland.txt				Mac OS Icelandic
 apple/inuit.txt					Mac OS Inuit

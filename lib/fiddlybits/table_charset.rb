@@ -1,5 +1,17 @@
 module Fiddlybits
   class TableCharset < Charset
+
+    # Used for some encodings where the current byte may or may not end the sequence.
+    class ConditionalSequence
+      attr_reader :string
+      attr_reader :array
+
+      def initialize(string, array)
+        @string = string
+        @array = array
+      end
+    end
+
     attr_reader :min_bytes_per_char
     attr_reader :max_bytes_per_char
 
@@ -22,6 +34,18 @@ module Fiddlybits
         (0...bytes.size).each do |i|
           b = bytes[i]
           node = node[b] # todo rewrite this bit in proper OO
+
+          if node.is_a?(ConditionalSequence)
+            # If the *next* byte is in the conditional sequence's array, pretend that
+            # this node is an array. If it isn't, treat it like a terminal node.
+            nb = bytes[i+1]
+            if nb && node.array[nb]
+              node = node.array
+            else
+              node = node.string
+            end
+          end
+
           if node.is_a?(String)
             # terminal node
             decoded_bytes = bytes[0..i]
@@ -66,10 +90,12 @@ module Fiddlybits
           if in_charset
             # Lines look like this:
             # <U00D7>  \x21\x5F |0
-            if line =~ /<U(.*?)>\s+(\\x\S+)\s+|(\d)/
-              string = [$1.hex].pack('U*')
-              bytes = [$2.gsub(/\\x/, '')].pack('H*').bytes
-              type = $3.to_i
+            if line =~ /^<U(.*?)>\s+(\\x\S+)\s+\|(\d)$/
+              string_raw, bytes_raw, type_raw = $1, $2, $3
+
+              string = [string_raw.hex].pack('U*')
+              bytes = [bytes_raw.gsub(/\\x/, '')].pack('H*').bytes
+              type = type_raw.to_i
 
               min_bytes_per_char = [min_bytes_per_char, bytes.size].min
               max_bytes_per_char = [max_bytes_per_char, bytes.size].max
@@ -83,12 +109,16 @@ module Fiddlybits
               if type == 0 || type == 3
                 add_to_table(root, bytes, string)
               end
+            else
+              raise "Couldn't parse line: [#{line}] in file: #{file}"
             end
           end
         end
       end
 
       new(name, root, min_bytes_per_char, max_bytes_per_char)
+    rescue => e
+      raise "Cannot parse #{file}: #{e.message}"
     end
 
     # Reads a file containing character mappings in the plain text format Unicode use.
@@ -103,13 +133,20 @@ module Fiddlybits
         next if line.empty?
         
         # Lines look like this:
-        # 0x2131  0x201D  # RIGHT DOUBLE QUOTATION MARK
-        # 0x2131  0x201D  # RIGHT DOUBLE QUOTATION MARK
+        # 0x2131      0x201D
         # If a mapping maps to multiple code points:
-        # 0x2477  0x304B+309A
-        if line =~ /^0x([0-9a-fA-F]{2}+)\s+(0x[0-9a-fA-F]{4,}(?:\+0x[0-9a-fA-F]{4,}+)*)$/
-          bytes = [$1].pack('H*').bytes
-          string = $2.split(/\+/).map{|h| h.hex}.pack('U*')
+        # 0x2477      0x304B+0x309A
+        # If a mapping has special rules for multiple byte sequences, you can get this too:
+        # 0xA1+0xE9   0x0AD0
+        # And of course you can have a combination of the two.
+
+        bp = '0x[0-9a-fA-F]{2}+'  # even number of hex digits
+        cp = '0x[0-9a-fA-F]{4,}'  # at least 4 hex digits
+        if line =~ /^(#{bp}(?:\+#{bp})*)\s+(#{cp}(?:\+#{cp})*)$/
+          bytes_raw, string_raw = $1, $2
+
+          bytes = [bytes_raw.gsub(/0x|\+/, '')].pack('H*').bytes
+          string = string_raw.split(/\+/).map{|h| h.hex}.pack('U*')
 
           min_bytes_per_char = [min_bytes_per_char, bytes.size].min
           max_bytes_per_char = [max_bytes_per_char, bytes.size].max
@@ -128,7 +165,16 @@ module Fiddlybits
         node = (node[b] ||= [])
       end
 
-      node[bytes[-1]] = string
+      existing = node[bytes[-1]]
+      if existing
+        if existing.is_a?(Array)
+          node[bytes[-1]] = ConditionalSequence.new(string, existing)
+        else
+          raise "Would overwrite existing node: #{existing} for byte sequence: #{bytes.inspect}"
+        end
+      else
+        node[bytes[-1]] = string
+      end
     end
 
     #TODO: I really want a better place to put all the data.
