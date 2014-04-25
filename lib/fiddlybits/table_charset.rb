@@ -115,6 +115,8 @@ module Fiddlybits
           max_bytes_per_char = [max_bytes_per_char, bytes.size].max
 
           add_to_table(root, bytes, string)
+        else
+          raise "Couldn't parse line: [#{line}] in file: #{file}"
         end
       end
       new(name, root, min_bytes_per_char, max_bytes_per_char)
