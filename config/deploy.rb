@@ -10,7 +10,7 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets}
 set :default_env, { path: '/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH' }
 
 set :rbenv_type, :system
-set :rbenv_ruby, '2.0.0-p451'
+set :rbenv_ruby, '2.1.1'
 
 namespace :deploy do
 
