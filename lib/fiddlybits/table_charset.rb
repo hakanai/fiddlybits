@@ -12,6 +12,17 @@ module Fiddlybits
       end
     end
 
+    # Used for some encodings which specify a character with a particular direction.
+    class DirectionalString
+      attr_reader :string
+      attr_reader :direction
+
+      def initialize(string, direction)
+        @string = string
+        @direction = direction
+      end
+    end
+
     attr_reader :min_bytes_per_char
     attr_reader :max_bytes_per_char
 
@@ -50,6 +61,13 @@ module Fiddlybits
             # terminal node
             decoded_bytes = bytes[0..i]
             decoded_fragments << DecodedData.new(decoded_bytes, node, 'table lookup')
+            bytes = bytes[i+1..-1]
+            break
+          elsif node.is_a?(DirectionalString)
+            # terminal node
+            decoded_bytes = bytes[0..i]
+            decoded_fragments << DecodedData.new(decoded_bytes, node.string, 'table lookup',
+                                                 direction: node.direction)
             bytes = bytes[i+1..-1]
             break
           elsif node.is_a?(Array)
@@ -142,8 +160,8 @@ module Fiddlybits
 
         bp = '0x[0-9a-fA-F]{2}+'  # even number of hex digits
         cp = '0x[0-9a-fA-F]{4,}'  # at least 4 hex digits
-        if line =~ /^(#{bp}(?:\+#{bp})*)\s+(#{cp}(?:\+#{cp})*)$/
-          bytes_raw, string_raw = $1, $2
+        if line =~ /^(#{bp}(?:\+#{bp})*)\s+(?:<(LR|RL)>\+)?(#{cp}(?:\+#{cp})*)$/
+          bytes_raw, dir_raw, string_raw = $1, $2, $3
 
           bytes = [bytes_raw.gsub(/0x|\+/, '')].pack('H*').bytes
           string = string_raw.split(/\+/).map{|h| h.hex}.pack('U*')
@@ -151,7 +169,18 @@ module Fiddlybits
           min_bytes_per_char = [min_bytes_per_char, bytes.size].min
           max_bytes_per_char = [max_bytes_per_char, bytes.size].max
 
-          add_to_table(root, bytes, string)
+          node = case dir_raw
+            when nil
+              string
+            when 'LR'
+              DirectionalString.new(string, :ltr)
+            when 'RL'
+              DirectionalString.new(string, :rtl)
+            else
+              raise "Invalid direction: #{dir_raw}"
+          end
+
+          add_to_table(root, bytes, node)
         else
           raise "Couldn't parse line: [#{line}] in file: #{file}"
         end

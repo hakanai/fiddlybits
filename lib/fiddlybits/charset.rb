@@ -6,11 +6,15 @@ module Fiddlybits
       attr_reader :bytes
       attr_reader :string
       attr_reader :explanation
+      attr_reader :direction
 
-      def initialize(bytes, string, explanation)
+      # Supported options:
+      #   direction: Indicates a specific direction treatment for the character (:rtl or :ltr)
+      def initialize(bytes, string, explanation, options = {})
         @bytes = bytes.dup
         @string = string
         @explanation = explanation
+        @direction = options[:direction] if options[:direction]
       end
     end
 

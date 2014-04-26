@@ -11,6 +11,26 @@ class TableCharsetTest < ActiveSupport::TestCase
     assert_equal "ओ३म् (ॐ) या ओंकार का नामांतर प्रणव है।", decode(hex, Fiddlybits::TableCharset::MAC_OS_DEVANAGARI)
   end
 
+  test "decoding Mac OS Hebrew" do
+    hex = 'E4 F0 E7 E9 E5 FA A0 ' +
+          'EC E4 F0 E2 F9 FA A0 ' +
+          'FA EB F0 E9 A0 ' +
+          'E0 FA F8 E9 A0 ' +
+          'E0 E9 F0 E8 F8 F0 E8 A0 ' +
+          '28 57 43 41 47 29 A0 ' +
+          '32 2E 30'
 
+    # rtl makes a mess of the source so I am using escapes.
+    rtlspace = "\u202E \u202C"
+    str = "\u05D4\u05E0\u05D7\u05D9\u05D5\u05EA" + rtlspace +
+          "\u05DC\u05D4\u05E0\u05D2\u05E9\u05EA" + rtlspace +
+          "\u05EA\u05DB\u05E0\u05D9" + rtlspace +
+          "\u05D0\u05EA\u05E8\u05D9" + rtlspace +
+          "\u05D0\u05D9\u05E0\u05D8\u05E8\u05E0\u05D8" + rtlspace +
+          "\u202D(\u202C" + "WCAG" + "\u202D)\u202C" + rtlspace +
+          "2" + "\u202D.\u202C" + "0"
+
+    assert_equal str, decode(hex, Fiddlybits::TableCharset::MAC_OS_HEBREW)
+  end
 
 end

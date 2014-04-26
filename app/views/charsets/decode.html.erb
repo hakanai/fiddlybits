@@ -52,6 +52,11 @@
                 <% code_point = UnicodeUtils::Codepoint.new(cp) -%>
                 <%= code_point.uplus %> <%= code_point.name %>
               <% end %>
+              <% if fragment.direction == :ltr %>
+                (left-to-right)
+              <% elsif fragment.direction == :rtl %>
+                (right-to-left)
+              <% end %>
             </td>
             <td><%= fragment.explanation %></td>
           <% elsif fragment.is_a?(Fiddlybits::Charset::EscapeSequence) %>
