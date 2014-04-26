@@ -8,7 +8,7 @@ Part of the problem is that utility and frameworks don't exist for this already 
 
 This application requires:
 
-* Ruby 2.0
+* Ruby 2.1
 * Bundler (which you will use to get all other dependencies)
 
 TODO: Quickstart setup instructions
