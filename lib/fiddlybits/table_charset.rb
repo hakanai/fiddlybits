@@ -55,7 +55,7 @@ module Fiddlybits
     # to bytes as the first step.
     def decode(data)
       bytes = data.is_a?(String) ? data.bytes : data
-      decoded_fragments = []
+      decode_result = DecodeResult.new
       while bytes.size > 0
         node = table_data.root
         (0...bytes.size).each do |i|
@@ -76,13 +76,13 @@ module Fiddlybits
           if node.is_a?(String)
             # terminal node
             decoded_bytes = bytes[0..i]
-            decoded_fragments << DecodedData.new(decoded_bytes, node, 'table lookup')
+            decode_result << DecodedData.new(decoded_bytes, node, 'table lookup')
             bytes = bytes[i+1..-1]
             break
           elsif node.is_a?(DirectionalString)
             # terminal node
             decoded_bytes = bytes[0..i]
-            decoded_fragments << DecodedData.new(decoded_bytes, node.string, 'table lookup',
+            decode_result << DecodedData.new(decoded_bytes, node.string, 'table lookup',
                                                  direction: node.direction)
             bytes = bytes[i+1..-1]
             break
@@ -90,7 +90,7 @@ module Fiddlybits
             # back around 
           elsif node.nil?
             # invalid sequence
-            decoded_fragments << RemainingData.new(bytes)
+            decode_result << RemainingData.new(bytes)
             bytes.clear
             break
           else
@@ -99,11 +99,11 @@ module Fiddlybits
         end
         if node.is_a?(Array)
           # incomplete sequence
-          decoded_fragments << RemainingData.new(bytes)
+          decode_result << RemainingData.new(bytes)
           bytes.clear
         end
       end
-      decoded_fragments
+      decode_result
     end
 
     def min_bytes_per_char

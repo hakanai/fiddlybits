@@ -6,13 +6,15 @@ module Fiddlybits
 
     def decode(data)
       bytes = data.is_a?(String) ? data.bytes : data
-      bytes.map do |b|
+      decode_result = DecodeResult.new
+      bytes.each do |b|
         if b < 0x80
-          DecodedData.new([b], [b].pack('U'), 'cast')
+          decode_result << DecodedData.new([b], [b].pack('U'), 'cast')
         else
-          RemainingData.new([b])
+          decode_result << RemainingData.new([b])
         end
       end
+      decode_result
     end
 
     def min_bytes_per_char; 1; end

@@ -47,14 +47,14 @@ module Fiddlybits
     def decode(data)
       state = OpenStruct.new
       state.bytes = data.is_a?(String) ? data.bytes : data
-      state.decoded_fragments = []
+      state.decode_result = DecodeResult.new
       @initial_state.call(state)
       while !state.bytes.empty?
         # Are we looking at an escape sequence?
         escape_sequence, rule = @rules.find { |seq, rule| state.bytes[0..seq.size-1] == seq }
         if escape_sequence
           meaning = readable_escape_sequence(escape_sequence) + ' - ' + rule[:explanation]
-          state.decoded_fragments << EscapeSequence.new(escape_sequence, meaning, 'escape sequence table lookup')
+          state.decode_result << EscapeSequence.new(escape_sequence, meaning, 'escape sequence table lookup')
           state.bytes = state.bytes[escape_sequence.size..-1]
           rule[:state_change].call(state)
           next
@@ -64,7 +64,7 @@ module Fiddlybits
 
         # Is the character some other control character?
         if (b >= 0x0 && b < 0x20) || (b >= 0x80 && b < 0xa0)
-          state.decoded_fragments << DecodedData.new([b], [b].pack('U*'), 'cast control character')
+          state.decode_result << DecodedData.new([b], [b].pack('U*'), 'cast control character')
           state.bytes = state.bytes[1..-1]
           next
         end
@@ -80,7 +80,7 @@ module Fiddlybits
 
         # Are we looking at one of the special characters, SPACE or DELETE?
         if working_set == :g0 && [0x20, 0x7f].include?(b)
-          state.decoded_fragments << DecodedData.new([b], [b].pack('U*'), 'cast special value')
+          state.decode_result << DecodedData.new([b], [b].pack('U*'), 'cast special value')
           state.bytes = state.bytes[1..-1]
           next
         end
@@ -90,12 +90,12 @@ module Fiddlybits
         decode_one_character(state, charset)
       end
 
-      state.decoded_fragments
+      state.decode_result
     end
 
     def decode_one_character(state, charset)
       size = charset.min_bytes_per_char
-      state.decoded_fragments += charset.decode(state.bytes[0..size-1])
+      state.decode_result.concat(charset.decode(state.bytes[0..size-1]))
       state.bytes = state.bytes[size..-1]
     end
 

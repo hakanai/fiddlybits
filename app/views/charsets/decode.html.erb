@@ -22,17 +22,7 @@
 
 <% if @result %>
   <h2>Result</h2>
-  <p><%=
-    @result.map do |fragment|
-      if fragment.is_a?(Fiddlybits::Charset::DecodedData)
-        fragment.string
-      elsif fragment.is_a?(Fiddlybits::Charset::RemainingData)
-        '(error!)' # TODO CSS
-      else
-        ''
-      end
-    end.join
-  %></p>
+  <p><%= @result.text %></p>
 
   <h2>Detailed Result</h2>
   <table>

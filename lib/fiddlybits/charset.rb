@@ -1,6 +1,34 @@
 module Fiddlybits
   class Charset
 
+    # Result of decoding text.
+    class DecodeResult < Array
+
+      # Gets the result as plain text.
+      def text
+        string = ''
+        each do |fragment|
+          if fragment.is_a?(Fiddlybits::Charset::DecodedData)
+            #TODO: This is overriding unnecessarily in some cases. Should be using the Unicode bidi algorithm
+            #      to determine the natural direction of each character and override only if necessary.
+            if fragment.direction == :ltr
+              string << "\u202D"
+            elsif fragment.direction == :rtl
+              string << "\u202E"
+            end
+
+            string << fragment.string
+
+            if fragment.direction
+              string << "\u202C"
+            end
+          end
+        end
+        string
+      end
+
+    end
+
     # Result object indicating successfully-decoded data.
     class DecodedData
       attr_reader :bytes
