@@ -1,6 +1,8 @@
 require 'ostruct'
 
 module Fiddlybits
+  using DeepFreeze
+
   class Iso2022Charset < Charset
 
     # Delegating charset implementation allows us to treat charsets like ISO-8859-1
@@ -90,7 +92,7 @@ module Fiddlybits
         decode_one_character(state, charset)
       end
 
-      state.decode_result
+      state.decode_result.deep_freeze
     end
 
     def decode_one_character(state, charset)

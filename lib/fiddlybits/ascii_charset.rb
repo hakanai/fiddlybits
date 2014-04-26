@@ -1,4 +1,6 @@
 module Fiddlybits
+  using DeepFreeze
+
   class AsciiCharset < Charset
     def initialize
       super('US-ASCII')
@@ -14,7 +16,7 @@ module Fiddlybits
           decode_result << RemainingData.new([b])
         end
       end
-      decode_result
+      decode_result.deep_freeze
     end
 
     def min_bytes_per_char; 1; end

@@ -1,50 +1,62 @@
 module Fiddlybits
+  using DeepFreeze
+
   class TableCharset < Charset
 
     # Used for some encodings where the current byte may or may not end the sequence.
     class ConditionalSequence
+      include Immutable
+
       attr_reader :string
       attr_reader :array
 
       def initialize(string, array)
-        @string = string
-        @array = array
+        @string = string.freeze
+        @array = array.deep_freeze
+        freeze
       end
     end
 
     # Used for some encodings which specify a character with a particular direction.
     class DirectionalString
+      include Immutable
+
       attr_reader :string
       attr_reader :direction
 
       def initialize(string, direction)
-        @string = string
-        @direction = direction
+        @string = string.freeze
+        @direction = direction.freeze
       end
     end
 
     # Encapsulates data in the table.
     class TableData
+      include Immutable
+
       attr_reader :root
       attr_reader :min_bytes_per_char
       attr_reader :max_bytes_per_char
 
       def initialize(root, min_bytes_per_char, max_bytes_per_char)
-        @root = root
-        @min_bytes_per_char = min_bytes_per_char
-        @max_bytes_per_char = max_bytes_per_char
+        @root = root.deep_freeze
+        @min_bytes_per_char = min_bytes_per_char.freeze
+        @max_bytes_per_char = max_bytes_per_char.freeze
+        freeze
       end
     end
 
     def initialize(name, format, file)
       super(name)
-      @format = format
-      @file = file
+
+      @format = format.freeze
+      @file = file.freeze
     end
 
     def table_data
       if !@table_data
         @table_data = @format.parse(@file)
+        freeze # no further mutation once loaded
       end
       @table_data
     end
@@ -103,7 +115,7 @@ module Fiddlybits
           bytes.clear
         end
       end
-      decode_result
+      decode_result.deep_freeze
     end
 
     def min_bytes_per_char
@@ -248,8 +260,6 @@ module Fiddlybits
     #TODO: More charsets
     # Here's where ICU's list of mappings from various names is:
     # http://source.icu-project.org/repos/icu/icu/trunk/source/data/mappings/convrtrs.txt
-
-    #TODO: All these objects should be immutable including the arrays inside.
 
     File.readlines("#{charsets_data}/mappings.txt").each do |line|
       line.gsub!(/#.*$/, '')

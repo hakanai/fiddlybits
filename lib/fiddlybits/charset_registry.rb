@@ -11,7 +11,7 @@ module Fiddlybits
           all += cls.constants.map { |c| cls.const_get(c) }.select { |v| v.is_a?(Charset) }
         end
         # Sorting alphanumerics sensibly.
-        all.sort_by! { |cs| cs.name.gsub(/\d+/) { |n| "%05d" % n.to_i } }
+        all.sort_by! { |cs| cs.name.upcase.gsub(/\d+/) { |n| "%05d" % n.to_i } }
         @all = all
       end
 
