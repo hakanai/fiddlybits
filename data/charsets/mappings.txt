@@ -20,9 +20,6 @@ iso-8859/8859-14-1998.txt		ISO 8859-14:1998
 iso-8859/8859-15-1999.txt		ISO 8859-15:1999
 iso-8859/8859-16-2001.txt		ISO 8859-16:2001
 
-#TODO Some encodings here require inserting Unicode direction symbols
-#     which we can't do with the basic table encoding.
-
 apple/arabic.txt				Mac OS Arabic
 apple/celtic.txt				Mac OS Celtic
 apple/centeuro.txt				Mac OS Central European
