@@ -1,5 +1,5 @@
 module Fiddlybits
-  using DeepFreeze
+  using Fiddlybits::DeepFreeze
 
   class AsciiCharset < Charset
     def initialize

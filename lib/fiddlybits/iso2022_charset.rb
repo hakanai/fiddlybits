@@ -1,7 +1,7 @@
 require 'ostruct'
 
 module Fiddlybits
-  using DeepFreeze
+  using Fiddlybits::DeepFreeze
 
   class Iso2022Charset < Charset
 
@@ -148,22 +148,22 @@ module Fiddlybits
       start_as_ascii_only,
       {
         "\e(B" => self.designate_set(:g0, AsciiCharset::US_ASCII),
-        "\e(J" => designate_set(:g0, TableCharset::JISX0201_1976_ROMAN),
-        "\e$@" => designate_set(:g0, TableCharset::JISX0208_1978_0),
-        "\e$B" => designate_set(:g0, TableCharset::JISX0208_1983_0)
+        "\e(J" => designate_set(:g0, TableCharset::JIS_X_0201_1976_ROMAN),
+        "\e$@" => designate_set(:g0, TableCharset::JIS_X_0208_1978),
+        "\e$B" => designate_set(:g0, TableCharset::JIS_X_0208_1983)
       })
 
     ISO_2022_JP_1 = ISO_2022_JP.new_extension(
       'ISO-2022-JP-1',
       {
-        "\e$(D" => designate_set(:g0, TableCharset::JISX0212_1990)
+        "\e$(D" => designate_set(:g0, TableCharset::JIS_X_0212_1990)
       })
 
     ISO_2022_JP_2 = ISO_2022_JP_1.new_extension(
       'ISO-2022-JP-2',
       {
-        "\e$A"  => designate_set(:g0, TableCharset::GB2312_1980),
-        "\e$(C" => designate_set(:g0, TableCharset::KSX1001_1992),
+        "\e$A"  => designate_set(:g0, TableCharset::GB_2312_1980),
+        "\e$(C" => designate_set(:g0, TableCharset::KS_X_1001_1992),
         "\e.A"  => designate_set(:g2, HighPartOnlyCharset.new('ISO-8859-1 high part', TableCharset::ISO_8859_1_1998)),
         "\e.F"  => designate_set(:g2, HighPartOnlyCharset.new('ISO-8859-7 high part', TableCharset::ISO_8859_7_2003)),
         "\eN"   => single_shift(:g2)
@@ -173,15 +173,15 @@ module Fiddlybits
     ISO_2022_JP_3 = ISO_2022_JP.new_extension(
       'ISO-2022-JP-3',
       {
-        "\e(I"  => designate_set(:g0, TableCharset::JISX0201_1976_KANA),
-        "\e$(O" => designate_set(:g0, TableCharset::JISX0213_2000_PLANE1),
-        "\e$(P" => designate_set(:g0, TableCharset::JISX0213_2000_PLANE2)
+        "\e(I"  => designate_set(:g0, TableCharset::JIS_X_0201_1976_KANA),
+        "\e$(O" => designate_set(:g0, TableCharset::JIS_X_0213_2000_PLANE_1),
+        "\e$(P" => designate_set(:g0, TableCharset::JIS_X_0213_2000_PLANE_2)
       })
 
     ISO_2022_JP_2004 = ISO_2022_JP_3.new_extension(
       'ISO-2022-JP-2004',
       {
-        "\e$(Q" => designate_set(:g0, TableCharset::JISX0213_2004)
+        "\e$(Q" => designate_set(:g0, TableCharset::JIS_X_0213_2004)
       })
 
     ISO_2022_KR = Iso2022Charset.new(
@@ -190,7 +190,7 @@ module Fiddlybits
       {
         "\016" => shift_out,
         "\017" => shift_in,
-        "\e$)C" => designate_set(:g1, TableCharset::KSX1001_1992)
+        "\e$)C" => designate_set(:g1, TableCharset::KS_X_1001_1992)
       })
   end
 end

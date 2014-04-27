@@ -1,5 +1,5 @@
 module Fiddlybits
-  using DeepFreeze
+  using Fiddlybits::DeepFreeze
 
   class TableCharset < Charset
 
@@ -257,10 +257,6 @@ module Fiddlybits
     #TODO: I really want a better place to put all the data.
     charsets_data = File.realpath(File.join(File.dirname(__FILE__), '../../data/charsets'))
 
-    #TODO: More charsets
-    # Here's where ICU's list of mappings from various names is:
-    # http://source.icu-project.org/repos/icu/icu/trunk/source/data/mappings/convrtrs.txt
-
     File.readlines("#{charsets_data}/mappings.txt").each do |line|
       line.gsub!(/#.*$/, '')
       line.strip!
@@ -275,16 +271,5 @@ module Fiddlybits
         TableCharset.const_set(const_name, TableCharset.new(human_name, TextFormat::INSTANCE, full_path))
       end
     end
-
-    GB2312_1980 = TableCharset.new('GB 2312-1980', UcmFormat::INSTANCE, "#{charsets_data}/ucm/ibm-5478_P100-1995.ucm")
-    JISX0201_1976_ROMAN = TableCharset.new('JIS X 0201-1976 roman', TextFormat::INSTANCE, "#{charsets_data}/txt/jisx-0201-1976-roman.txt")
-    JISX0201_1976_KANA = TableCharset.new('JIS X 0201-1976 kana', TextFormat::INSTANCE, "#{charsets_data}/txt/jisx-0201-1976-kana.txt")
-    JISX0208_1978_0 = TableCharset.new('JIS X 0208-1978', UcmFormat::INSTANCE, "#{charsets_data}/ucm/ibm-955_P110-1997.ucm")
-    JISX0208_1983_0 = TableCharset.new('JIS X 0208-1983', UcmFormat::INSTANCE, "#{charsets_data}/ucm/aix-JISX0208.1983_0-4.3.6.ucm")
-    JISX0212_1990 = TableCharset.new('JIS X 0212-1990', UcmFormat::INSTANCE, "#{charsets_data}/ucm/jisx-0212-1990.ucm")
-    JISX0213_2000_PLANE1 = TableCharset.new('JIS X 0213-2000 plane 1', TextFormat::INSTANCE, "#{charsets_data}/txt/jisx-0213-2000-plane1.txt")
-    JISX0213_2000_PLANE2 = TableCharset.new('JIS X 0213-2000 plane 2', TextFormat::INSTANCE, "#{charsets_data}/txt/jisx-0213-2000-plane2.txt")
-    JISX0213_2004 = TableCharset.new('JIS X 0213-2004', TextFormat::INSTANCE, "#{charsets_data}/txt/jisx-0213-2004.txt")
-    KSX1001_1992 = TableCharset.new('KS X 1001-1992', TextFormat::INSTANCE, "#{charsets_data}/txt/ksx1001-1992.txt")
   end
 end

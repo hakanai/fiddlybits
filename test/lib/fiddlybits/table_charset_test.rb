@@ -3,6 +3,12 @@ require_relative 'charset_test_helper'
 class TableCharsetTest < ActiveSupport::TestCase
   include CharsetTestHelper
 
+  test "loading all table charsets" do
+    Fiddlybits::CharsetRegistry.find_all.each do |cs|
+      cs.decode([0]) if cs.is_a?(Fiddlybits::TableCharset)
+    end
+  end
+
   test "decoding Mac OS Devanagari" do
     hex = 'B0 F4 CC E8 20 28 A1 E9 29 20 CD DA 20 B0 A2 B3 ' +
           'DA CF 20 B3 DA 20 C6 DA CC DA A2 C2 CF 20 C8 E8 ' +
