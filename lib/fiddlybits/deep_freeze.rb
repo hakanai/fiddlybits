@@ -9,7 +9,7 @@ module Fiddlybits
 
     # Classes where freeze is enough
     # (at least in our case. A more general solution might look at the instance variables.)
-    [ String, TrueClass, FalseClass, NilClass, Integer ].each do |c|
+    [ String, Symbol, TrueClass, FalseClass, NilClass, Integer ].each do |c|
       refine c do
         def deep_freeze
           freeze

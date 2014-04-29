@@ -7,7 +7,7 @@ module Fiddlybits
     def self.find_all
       if !@all
         all = []
-        [ Iso2022Charset, TableCharset, AsciiCharset ].each do |cls|
+        [ Iso2022Charset, EucCharset, TableCharset, AsciiCharset ].each do |cls|
           all += cls.constants.map { |c| cls.const_get(c) }.select { |v| v.is_a?(Charset) }
         end
         # Sorting alphanumerics sensibly.

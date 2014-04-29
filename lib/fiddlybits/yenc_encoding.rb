@@ -6,7 +6,7 @@ module Fiddlybits
     # @param data [String] the data to encode.
     # @return the encoded data.
     def encode(data)
-      [data].pack('u')
+      YEnc.encode.pack('u')
     end
 
     # Decodes text to binary.

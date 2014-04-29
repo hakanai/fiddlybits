@@ -15,7 +15,7 @@ module Fiddlybits
 
       def decode(data)
         bytes = data.is_a?(String) ? data.bytes : data
-        bytes.map { |b| b + 0x80 }
+        bytes = bytes.map { |b| b + 0x80 }
         @delegate.decode(bytes)
       end
 
@@ -73,12 +73,7 @@ module Fiddlybits
 
         # Is the character in GL or GR? Determine which working set (Gn) it belongs to.
         # If it's in GR, offset it for the table lookups.
-        working_set = if b > 0x80
-          state.gr
-          b -= 0x80
-        else
-          state.gl
-        end
+        working_set = b > 0x80 ? state.gr : state.gl
 
         # Are we looking at one of the special characters, SPACE or DELETE?
         if working_set == :g0 && [0x20, 0x7f].include?(b)
@@ -89,15 +84,22 @@ module Fiddlybits
 
         # It's none of the above so decode the character using the working set.
         charset = state.send(working_set)
-        decode_one_character(state, charset)
+        decode_one_character(state, charset, )
       end
 
       state.decode_result.deep_freeze
     end
 
+    #TODO: Code duplication with EucCharset. The state objects are different but the properties used here match.
     def decode_one_character(state, charset)
       size = charset.min_bytes_per_char
-      state.decode_result.concat(charset.decode(state.bytes[0..size-1]))
+      bs = state.bytes[0..size-1]
+
+      if bs[0] > 0x80
+        bs = bs.map { |b| b - 0x80 }
+      end
+
+      state.decode_result.concat(charset.decode(bs))
       state.bytes = state.bytes[size..-1]
     end
 
@@ -162,7 +164,7 @@ module Fiddlybits
     ISO_2022_JP_2 = ISO_2022_JP_1.new_extension(
       'ISO-2022-JP-2',
       {
-        "\e$A"  => designate_set(:g0, TableCharset::GB_2312_1980),
+        "\e$A"  => designate_set(:g0, TableCharset::GB_2312_80),
         "\e$(C" => designate_set(:g0, TableCharset::KS_X_1001_1992),
         "\e.A"  => designate_set(:g2, HighPartOnlyCharset.new('ISO-8859-1 high part', TableCharset::ISO_8859_1_1998)),
         "\e.F"  => designate_set(:g2, HighPartOnlyCharset.new('ISO-8859-7 high part', TableCharset::ISO_8859_7_2003)),

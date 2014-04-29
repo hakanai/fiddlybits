@@ -7,6 +7,11 @@
 # ICU's list of mappings from various names:
 # http://source.icu-project.org/repos/icu/icu/trunk/source/data/mappings/convrtrs.txt
 
+# Guide to CJK written by Ken Lunde in 1995:
+# http://blogs.adobe.com/CCJKType/files/2013/09/cjk_inf.txt
+
+# http://www.asahi-net.or.jp/~ax2s-kmtn/character/asia.html
+
 iso-8859/8859-1-1998.txt			ISO 8859-1:1998
 iso-8859/8859-2-1999.txt			ISO 8859-2:1999
 iso-8859/8859-3-1999.txt			ISO 8859-3:1999
@@ -25,7 +30,33 @@ iso-8859/8859-14-1998.txt			ISO 8859-14:1998
 iso-8859/8859-15-1999.txt			ISO 8859-15:1999
 iso-8859/8859-16-2001.txt			ISO 8859-16:2001
 
-eastasia/gb-2312-1980.txt			GB 2312-1980
+eastasia/gb-2312-1980.txt			GB 2312-80
+#(GB1) GB/T 12345-90
+#(GB2) GB 7589-87
+#(GB3) GB/T 13131-91
+#(GB4) GB 7590-87
+#(GB5) GB/T 13132-91
+#GBK
+#GB18030-2000
+#GB18030-2005
+
+#GB12052-89 (Korean standard by China)
+
+#CCCII-1980
+#CCCII-1981
+#CCCII-1985
+#CCCII-1987
+#Big5-1984
+#Big5-2003
+#Big5-HKSCS-1999
+#Big5-HKSCS-2001
+#Big5-HKSCS-2004
+#Big5+
+#HKSCS-1999
+#HKSCS-2001
+#HKSCS-2004
+#CNS 11643-1986
+#CNS 11643-1992
 
 eastasia/jisx-0201-1976-kana.txt	JIS X 0201-1976 kana
 eastasia/jisx-0201-1976-roman.txt	JIS X 0201-1976 roman
@@ -40,6 +71,32 @@ eastasia/jisx-0213-2004.txt			JIS X 0213-2004
 eastasia/shift-jis.txt				Shift JIS
 
 eastasia/ksx-1001-1992.txt			KS X 1001-1992
+
+
+
+# KS X 1001-1974 - ???
+# KS X 1001-1982 - added appendix with hangul as 5-bit per jamo code in 16 (actually 15) bits?
+# KS X 1001-1992 - 16-bit code becomes part of the main format which now also includes hanja
+#				 - alias: 1986 <=> 1987 <=> 1989 <=> 1992
+# KS X 1001-1998 - added euro sign, registered trademark sign
+# KS X 1001-2002 - added postal sign
+# alias: KS C 5601-* <=> KS X 1001-*
+
+# KS X 1002-1991 - ???
+# alias: KS C 5657-* <=> KS X 1002-*
+
+# KS X 1003-1993 - aka KS-Roman, ISO-646-KR, ECMA-6 - ASCII with \ replaced by the won sign
+#				 - alias: 1989 <=> 1993
+#				 - 2003 version might exist too, is probably unchanged
+# alias: KS C 5636-* <=> KS X 1003-*
+
+#KS C 5619-1982 enumerated 51 hangul elements, 1,316 pre-combined hangul, and 1,672 hanja.
+#KIPS (Korean Information Processing System) enumerated 2,058 pre-combined hangul and 2,392 hanja.
+
+#KPS 9566-97
+#KPS 9566-2000
+#KPS 10721-2000
+#KPS 9566-2003
 
 apple/arabic.txt					Mac OS Arabic
 apple/celtic.txt					Mac OS Celtic
@@ -82,36 +139,44 @@ microsoft/ebcdic/cp1026.txt			EBCDIC 1026
 #microsoft/mac/roman.txt			MacRoman
 #microsoft/mac/turkish.txt			MacTurkish
 
-microsoft/pc/cp437.txt				MS-DOS 437 (US)
-microsoft/pc/cp720.txt				MS-DOS 720 (Arabic)
-microsoft/pc/cp737.txt				MS-DOS 737 (Greek)
-microsoft/pc/cp775.txt				MS-DOS 775 (Baltic)
-microsoft/pc/cp850.txt				MS-DOS 850 (Multilingual Latin I)
-microsoft/pc/cp852.txt				MS-DOS 852 (Latin II)
-microsoft/pc/cp855.txt				MS-DOS 855 (Cyrillic)
-microsoft/pc/cp857.txt				MS-DOS 857 (Turkish)
-microsoft/pc/cp860.txt				MS-DOS 858 (Multilingual Latin I + Euro)
-microsoft/pc/cp861.txt				MS-DOS 861 (Icelandic)
-microsoft/pc/cp862.txt				MS-DOS 862 (Hebrew)
-microsoft/pc/cp863.txt				MS-DOS 863 (French Canada)
-microsoft/pc/cp864.txt				MS-DOS 864 (Arabic II)
-microsoft/pc/cp865.txt				MS-DOS 865 (Nordic)
-microsoft/pc/cp866.txt				MS-DOS 866 (Russian)
-microsoft/pc/cp869.txt				MS-DOS 869 (Greek II)
-microsoft/pc/cp874.txt				MS-DOS 874 (Thai)
+microsoft/pc/cp437.txt				Microsoft code page 437 (US)
+microsoft/pc/cp720.txt				Microsoft code page 720 (Arabic)
+microsoft/pc/cp737.txt				Microsoft code page 737 (Greek)
+microsoft/pc/cp775.txt				Microsoft code page 775 (Baltic)
+microsoft/pc/cp850.txt				Microsoft code page 850 (Multilingual Latin I)
+microsoft/pc/cp852.txt				Microsoft code page 852 (Latin II)
+microsoft/pc/cp855.txt				Microsoft code page 855 (Cyrillic)
+microsoft/pc/cp857.txt				Microsoft code page 857 (Turkish)
+microsoft/pc/cp860.txt				Microsoft code page 858 (Multilingual Latin I + Euro)
+microsoft/pc/cp861.txt				Microsoft code page 861 (Icelandic)
+microsoft/pc/cp862.txt				Microsoft code page 862 (Hebrew)
+microsoft/pc/cp863.txt				Microsoft code page 863 (French Canada)
+microsoft/pc/cp864.txt				Microsoft code page 864 (Arabic II)
+microsoft/pc/cp865.txt				Microsoft code page 865 (Nordic)
+microsoft/pc/cp866.txt				Microsoft code page 866 (Russian)
+microsoft/pc/cp869.txt				Microsoft code page 869 (Greek II)
+microsoft/pc/cp874.txt				Microsoft code page 874 (Thai)
 
-microsoft/windows/cp874.txt			Windows 874 (Thai)
-microsoft/windows/cp932.txt			Windows 932 (Japanese)
-microsoft/windows/cp936.txt			Windows 936 (Simplified Chinese)
-microsoft/windows/cp949.txt			Windows 949 (Korean)
-microsoft/windows/cp950.txt			Windows 950 (Traditional Chinese)
-microsoft/windows/cp1250.txt		Windows 1250 (Central Europe)
-microsoft/windows/cp1251.txt		Windows 1251 (Cyrillic)
-microsoft/windows/cp1252.txt		Windows 1252 (Latin I)
-microsoft/windows/cp1253.txt		Windows 1253 (Greek)
-microsoft/windows/cp1254.txt		Windows 1254 (Turkish)
-microsoft/windows/cp1255.txt		Windows 1255 (Hebrew)
-microsoft/windows/cp1256.txt		Windows 1256 (Arabic)
-microsoft/windows/cp1257.txt		Windows 1257 (Baltic)
-microsoft/windows/cp1258.txt		Windows 1258 (Vietnam)
+#Microsoft code page 708 (Arabic ASMO)
+#Microsoft code page 851 (Greek III)
+#Microsoft code page 853 (Latin III)
+#Microsoft code page 868 (IBM Persian)
+#Microsoft code page 934 (MS-DOS Korean)
+#Microsoft code page 938 (MS-DOS Taiwanese)
+#Microsoft code page 999 (Yugoslavian ASCII-7)
+
+#microsoft/windows/cp874.txt			Microsoft code page 874 (Thai)
+microsoft/windows/cp932.txt			Microsoft code page 932 (Japanese)
+microsoft/windows/cp936.txt			Microsoft code page 936 (Simplified Chinese)
+microsoft/windows/cp949.txt			Microsoft code page 949 (Korean)
+microsoft/windows/cp950.txt			Microsoft code page 950 (Traditional Chinese)
+microsoft/windows/cp1250.txt		Microsoft code page 1250 (Central Europe)
+microsoft/windows/cp1251.txt		Microsoft code page 1251 (Cyrillic)
+microsoft/windows/cp1252.txt		Microsoft code page 1252 (Latin I)
+microsoft/windows/cp1253.txt		Microsoft code page 1253 (Greek)
+microsoft/windows/cp1254.txt		Microsoft code page 1254 (Turkish)
+microsoft/windows/cp1255.txt		Microsoft code page 1255 (Hebrew)
+microsoft/windows/cp1256.txt		Microsoft code page 1256 (Arabic)
+microsoft/windows/cp1257.txt		Microsoft code page 1257 (Baltic)
+microsoft/windows/cp1258.txt		Microsoft code page 1258 (Vietnam)
 
