@@ -18,15 +18,27 @@ module Fiddlybits
       while !state.bytes.empty?
         b = state.bytes[0]
         if b == 0x8E
-          meaning = 'SS2 - switch to G2 for next character'
-          state.decode_result << EscapeSequence.new([b], meaning, 'escape sequence table lookup')
-          state.bytes = state.bytes[1..-1]
-          decode_one_character(state, @sets[:g2])
+          set = @sets[:g2]
+          if set
+            meaning = "SS2 - switch to G2 (#{set.name}) for next character"
+            state.decode_result << EscapeSequence.new([b], meaning, 'escape sequence table lookup')
+            state.bytes = state.bytes[1..-1]
+            decode_one_character(state, set)
+          else
+            decode_result << RemainingData.new(bytes)
+            state.bytes = []
+          end
         elsif b == 0x8F
-          meaning = 'SS3 - switch to G3 for next character'
-          state.decode_result << EscapeSequence.new([b], meaning, 'escape sequence table lookup')
-          state.bytes = state.bytes[1..-1]
-          decode_one_character(state, @sets[:g3])
+          set = @sets[:g3]
+          if set
+            meaning = "SS3 - switch to G3 (#{set.name}) for next character"
+            state.decode_result << EscapeSequence.new([b], meaning, 'escape sequence table lookup')
+            state.bytes = state.bytes[1..-1]
+            decode_one_character(state, set)
+          else
+            decode_result << RemainingData.new(bytes)
+            state.bytes = []
+          end
         elsif b >= 0xA0
           decode_one_character(state, @sets[:g1])
         elsif b >= 0 && b < 0x80
@@ -52,11 +64,12 @@ module Fiddlybits
       state.bytes = state.bytes[size..-1]
     end
 
-    #TODO EUC_CN
-    # Wikipedia entry is too vague to implement, have to find another source.
-
-    #TODO EUC-JP
-    #  namely JIS X 0208, JIS X 0212, and JIS X 0201.
+    EUC_CN = EucCharset.new(
+      'EUC-CN',
+      {
+        g0: AsciiCharset::US_ASCII,
+        g1: TableCharset::GB_2312_80
+      })
 
     EUC_JP = EucCharset.new(
       'EUC-JP',
@@ -66,5 +79,25 @@ module Fiddlybits
         g2: TableCharset::JIS_X_0201_1976_KANA,
         g3: TableCharset::JIS_X_0212_1990
       })
+
+    # aka KS X 2901 aka RFC 1557
+    EUC_KR = EucCharset.new(
+      'EUC-KR',
+      {
+        #TODO some sources say KS X 1003 which is actually a different charset ISO 646-KR. who is right?
+        g0: AsciiCharset::US_ASCII,
+        # defined as 1987 in standards but 1992 is the same set. TODO: charset name aliases would improve this.
+        g1: TableCharset::KS_X_1001_1992
+      })
+
+    #TODO EUC_TW
+    # EUC_TW = EucCharset.new(
+    #   'EUC-TW',
+    #   {
+    #     g0: AsciiCharset::US_ASCII,
+    #     g1: TODO CNS 11643 plane 1
+    #     g2: TODO CNS 11643 with plane specified by first byte
+    #   })
+
   end
 end
