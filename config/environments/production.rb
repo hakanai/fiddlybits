@@ -82,11 +82,12 @@ Fiddlybits::Application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 
+  config.middleware.use ExceptionNotification::Rack,
+    :email => {
+      :email_prefix => "[Fiddlybits] ",
+      :sender_address => %{exceptions@fiddlybits.org},
+      :exception_recipients => %w{exceptions@fiddlybits.org}
+    }
+
 end
 
-Whatever::Application.config.middleware.use ExceptionNotification::Rack,
-  :email => {
-    :email_prefix => "[Fiddlybits] ",
-    :sender_address => %{exceptions@fiddlybits.org},
-    :exception_recipients => %w{exceptions@fiddlybits.org}
-  }
