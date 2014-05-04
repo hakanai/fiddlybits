@@ -75,6 +75,12 @@ module Fiddlybits
         # If it's in GR, offset it for the table lookups.
         working_set = b > 0x80 ? state.gr : state.gl
 
+        if !working_set
+          state.decode_result << RemainingData.new([b])
+          state.bytes = state.bytes[1..-1]
+          next
+        end
+
         # Are we looking at one of the special characters, SPACE or DELETE?
         if working_set == :g0 && [0x20, 0x7f].include?(b)
           state.decode_result << DecodedData.new([b], [b].pack('U*'), 'cast special value')
