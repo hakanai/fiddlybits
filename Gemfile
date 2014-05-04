@@ -37,6 +37,9 @@ end
 # Use unicorn as the app server
 gem 'unicorn'
 
+# Exception reporting
+gem 'exception_notification'
+
 # Use Capistrano for deployment
 gem 'capistrano', group: :development
 gem 'capistrano-rails', '~> 1.1', group: :development

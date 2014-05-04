@@ -77,4 +77,16 @@ Fiddlybits::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+
 end
+
+Whatever::Application.config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix => "[Fiddlybits] ",
+    :sender_address => %{exceptions@fiddlybits.org},
+    :exception_recipients => %w{exceptions@fiddlybits.org}
+  }
