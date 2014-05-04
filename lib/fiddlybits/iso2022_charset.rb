@@ -26,23 +26,20 @@ module Fiddlybits
     def initialize(name, initial_state, rules)
       super(name)
       @initial_state = initial_state
-      @rules = {}
-      # Convert keys to bytes in advance because we're doing all operations on lists of bytes.
-      rules.each_pair do |escape, rule|
-        bytes = escape.is_a?(String) ? escape.bytes : escape
-        @rules[bytes] = rule
+      # Convert sequences to bytes in advance because we're doing all operations on lists of bytes.
+      rules.each do |rule|
+        seq = rule[:sequence]
+        seq = seq.is_a?(String) ? seq.bytes : seq
+        rule[:sequence] = seq
       end
+      @rules = rules
     end
 
     # Derives a new charset which has all the rules of this charset plus some additional rules.
     # Reduces repetition in the rule definitions but also makes the definitions look more like
     # what you would see in a description of each charset.
     def new_extension(name, additional_rules)
-      rules = @rules.clone
-      additional_rules.each_pair do |escape, rule|
-        bytes = escape.is_a?(String) ? escape.bytes : escape
-        rules[bytes] = rule
-      end
+      rules = @rules + additional_rules
       Iso2022Charset.new(name, @initial_state, rules)
     end
 
@@ -53,8 +50,9 @@ module Fiddlybits
       @initial_state.call(state)
       while !state.bytes.empty?
         # Are we looking at an escape sequence?
-        escape_sequence, rule = @rules.find { |seq, rule| state.bytes[0..seq.size-1] == seq }
-        if escape_sequence
+        rule = @rules.find { |rule| seq = rule[:sequence]; state.bytes[0..seq.size-1] == seq }
+        if rule
+          escape_sequence = rule[:sequence]
           meaning = readable_escape_sequence(escape_sequence) + ' - ' + rule[:explanation]
           state.decode_result << EscapeSequence.new(escape_sequence, meaning, 'escape sequence table lookup')
           state.bytes = state.bytes[escape_sequence.size..-1]
@@ -123,6 +121,7 @@ module Fiddlybits
 
     def self.shift_out
       {
+        sequence: "\016",
         explanation: 'locking shift one; GL encodes G1 from now on',
         state_change: proc { |s| s.gl = :g1 }
       }
@@ -130,75 +129,115 @@ module Fiddlybits
 
     def self.shift_in
       {
+        sequence: "\017",
         explanation: 'locking shift zero; GL encodes G0 from now on',
         state_change: proc { |s| s.gl = :g0 }
       }
     end
 
-    def self.single_shift(working_set)
+    def self.single_shift(n)
+      sequence = "\e#{(0x4C + n).chr}"
+      working_set = "g#{n}".to_sym
       {
+        sequence: sequence,
         explanation: "switch to #{working_set.to_s.upcase} for next character",
         state_change: proc { |s| decode_one_character(s, s.send(working_set)) }
       }
     end
 
-    def self.designate_set(working_set, charset)
+    #TODO The sequence for each set should be in a table somewhere.
+    def self.designate_set(n, sequence, charset)
+      working_set = "g#{n}".to_sym
       explanation = "switch to #{charset.name}"
       explanation += " (designated to #{working_set.to_s.upcase})" if working_set != :g0
       {
+        sequence: sequence,
         explanation: explanation,
         state_change: proc { |s| s[working_set] = charset }
       }
     end
 
+    ISO_2022_CN = Iso2022Charset.new(
+      'ISO-2022-CN',
+      start_as_ascii_only,
+      [
+        designate_set(1, "\e$)A", TableCharset::GB_2312_80),
+        designate_set(1, "\e$)G", TableCharset::CNS_11643_1986_PLANE_1),
+        designate_set(2, "\e$*H", TableCharset::CNS_11643_1986_PLANE_2),
+        shift_out,
+        shift_in,
+        single_shift(2)
+      ])
+
+    #TODO ISO-2022-CN-EXT. Lacking the character sets to implement it.
+#      ISO_2022_CN_EXT = ISO_2022_CN.new_extension(
+#        'ISO-2022-CN-EXT',
+#        [
+          # These additional sequences are standardised in advance of ISO-IR having mappings for them.
+          # But it doesn't have mappings as of 2014 and I suppose it's unlikely they will ever be added. :)
+          #designate_set(2, "\e$*<X7589>", GB 7589-87),
+          #designate_set(3, "\e$+<X7590>", GB 7590-87),
+          #designate_set(1, "\e$)<X12345>", GB 12345-90),
+          #designate_set(2, "\e$*<X13131>", GB 13131-91),
+          #designate_set(3, "\e$+<X13132>", GB 13132-91),
+ #         designate_set(1, "\e$)E", TableCharset::ISO_IR_165),
+ #         designate_set(3, "\e$+I", TableCharset::CNS_11643_1992_PLANE_3),
+ #         designate_set(3, "\e$+J", TableCharset::CNS_11643_1992_PLANE_4),
+ #         designate_set(3, "\e$+K", TableCharset::CNS_11643_1992_PLANE_5),
+ #         designate_set(3, "\e$+L", TableCharset::CNS_11643_1992_PLANE_6),
+ #         designate_set(3, "\e$+M", TableCharset::CNS_11643_1992_PLANE_7),
+ #         single_shift(3)
+ #       ])
+
+
     ISO_2022_JP = Iso2022Charset.new(
       'ISO-2022-JP',
       start_as_ascii_only,
-      {
-        "\e(B" => self.designate_set(:g0, AsciiCharset::US_ASCII),
-        "\e(J" => designate_set(:g0, TableCharset::JIS_X_0201_1976_ROMAN),
-        "\e$@" => designate_set(:g0, TableCharset::JIS_X_0208_1978),
-        "\e$B" => designate_set(:g0, TableCharset::JIS_X_0208_1983)
-      })
+      [
+        designate_set(0, "\e(B", AsciiCharset::US_ASCII),
+        designate_set(0, "\e(J", TableCharset::JIS_X_0201_1976_ROMAN),
+        designate_set(0, "\e$@", TableCharset::JIS_X_0208_1978),
+        designate_set(0, "\e$B", TableCharset::JIS_X_0208_1983)
+      ])
 
     ISO_2022_JP_1 = ISO_2022_JP.new_extension(
       'ISO-2022-JP-1',
-      {
-        "\e$(D" => designate_set(:g0, TableCharset::JIS_X_0212_1990)
-      })
+      [
+        designate_set(0, "\e$(D", TableCharset::JIS_X_0212_1990)
+      ])
 
     ISO_2022_JP_2 = ISO_2022_JP_1.new_extension(
       'ISO-2022-JP-2',
-      {
-        "\e$A"  => designate_set(:g0, TableCharset::GB_2312_80),
-        "\e$(C" => designate_set(:g0, TableCharset::KS_X_1001_1992),
-        "\e.A"  => designate_set(:g2, HighPartOnlyCharset.new('ISO-8859-1 high part', TableCharset::ISO_8859_1_1998)),
-        "\e.F"  => designate_set(:g2, HighPartOnlyCharset.new('ISO-8859-7 high part', TableCharset::ISO_8859_7_2003)),
-        "\eN"   => single_shift(:g2)
-      })
+      [
+        designate_set(0, "\e$A", TableCharset::GB_2312_80),
+        designate_set(0, "\e$(C", TableCharset::KS_X_1001_1992),
+        designate_set(2, "\e.A", HighPartOnlyCharset.new('ISO-8859-1 high part', TableCharset::ISO_8859_1_1998)),
+        designate_set(2, "\e.F", HighPartOnlyCharset.new('ISO-8859-7 high part', TableCharset::ISO_8859_7_2003)),
+        single_shift(2)
+      ])
 
     # Note: this is not derived from ISO-2022-JP-2 as one might expect.
     ISO_2022_JP_3 = ISO_2022_JP.new_extension(
       'ISO-2022-JP-3',
-      {
-        "\e(I"  => designate_set(:g0, TableCharset::JIS_X_0201_1976_KANA),
-        "\e$(O" => designate_set(:g0, TableCharset::JIS_X_0213_2000_PLANE_1),
-        "\e$(P" => designate_set(:g0, TableCharset::JIS_X_0213_2000_PLANE_2)
-      })
+      [
+        designate_set(0, "\e(I", TableCharset::JIS_X_0201_1976_KANA),
+        designate_set(0, "\e$(O", TableCharset::JIS_X_0213_2000_PLANE_1),
+        designate_set(0, "\e$(P", TableCharset::JIS_X_0213_2000_PLANE_2)
+      ])
 
     ISO_2022_JP_2004 = ISO_2022_JP_3.new_extension(
       'ISO-2022-JP-2004',
-      {
-        "\e$(Q" => designate_set(:g0, TableCharset::JIS_X_0213_2004)
-      })
+      [
+        designate_set(0, "\e$(Q", TableCharset::JIS_X_0213_2004)
+      ])
 
     ISO_2022_KR = Iso2022Charset.new(
       'ISO-2022-KR',
       start_as_ascii_only,
-      {
-        "\016" => shift_out,
-        "\017" => shift_in,
-        "\e$)C" => designate_set(:g1, TableCharset::KS_X_1001_1992)
-      })
+      [
+        designate_set(1, "\e$)C", TableCharset::KS_X_1001_1992),
+        shift_out,
+        shift_in
+      ])
   end
 end

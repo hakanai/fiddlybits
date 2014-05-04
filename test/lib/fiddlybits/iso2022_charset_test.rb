@@ -3,6 +3,11 @@ require_relative 'charset_test_helper'
 class Iso2022CharsetTest < ActiveSupport::TestCase
   include CharsetTestHelper
 
+  test "decoding ISO-2022-CN" do
+    data = '1B 24 29 41 0E 3D 3B 3B 3B 1B 24 29 47 47 28 5F 50 0F'
+    assert_equal "交换交換", decode(data, Fiddlybits::Iso2022Charset::ISO_2022_CN)
+  end
+
   test "decoding ISO-2022-JP" do
     data = '72 6f 6d 61 6a 69 1B 24 42 24 2B 24 4A 34 41 3B 7A 1B 28 4A'
     assert_equal "romajiかな漢字", decode(data, Fiddlybits::Iso2022Charset::ISO_2022_JP)

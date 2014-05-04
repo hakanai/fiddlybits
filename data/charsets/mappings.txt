@@ -55,7 +55,9 @@ eastasia/gb-2312-1980.txt			GB 2312-80
 #HKSCS-1999
 #HKSCS-2001
 #HKSCS-2004
-#CNS 11643-1986
+eastasia/cns-11643-1986-plane1.txt	CNS 11643-1986 plane 1
+eastasia/cns-11643-1986-plane2.txt	CNS 11643-1986 plane 2
+#									CNS 11643-1986 plane 14 goes here
 #CNS 11643-1992
 
 koi/koi8-r.txt						KOI8-R
