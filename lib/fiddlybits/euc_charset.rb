@@ -41,7 +41,11 @@ module Fiddlybits
           end
         elsif b >= 0xA0
           decode_one_character(state, @sets[:g1])
-        elsif b >= 0 && b < 0x80
+        elsif b >= 0 && b < 0x20
+          # C0 table    TODO: What about C1?
+          state.decode_result << DecodedData.new([b], [b].pack('U'), 'cast')
+          state.bytes = state.bytes[1..-1]
+        elsif b >= 20 && b < 0x80
           decode_one_character(state, @sets[:g0])
         else
           decode_result << RemainingData.new([b])
@@ -56,7 +60,7 @@ module Fiddlybits
       size = charset.min_bytes_per_char
       bs = state.bytes[0..size-1]
 
-      if bs[0] > 0x80
+      if bs[0] >= 0x80
         bs = bs.map { |b| b - 0x80 }
       end
 
