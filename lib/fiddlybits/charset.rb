@@ -24,6 +24,8 @@ module Fiddlybits
             if fragment.direction
               string << "\u202C"
             end
+          elsif fragment.is_a?(Fiddlybits::Charset::RemainingData)
+            string << "\uFFFD"
           end
         end
         string
