@@ -58,6 +58,9 @@ eastasia/gb-2312-1980.txt			GB 2312-80
 #CNS 11643-1986
 #CNS 11643-1992
 
+koi/koi8-r.txt						KOI8-R
+koi/koi8-u.txt						KOI8-U
+
 eastasia/jisx-0201-1976-kana.txt	JIS X 0201-1976 kana
 eastasia/jisx-0201-1976-roman.txt	JIS X 0201-1976 roman
 eastasia/jisx-0201-1976.txt			JIS X 0201-1976
@@ -96,7 +99,7 @@ eastasia/ksx-1001-1992.txt			KS X 1001-1992
 #KPS 9566-97
 #KPS 9566-2000
 #KPS 10721-2000
-#KPS 9566-2003
+#eastasia/kps-9566-2003.txt			KPS 9566-2003
 
 apple/arabic.txt					Mac OS Arabic
 apple/celtic.txt					Mac OS Celtic
@@ -138,6 +141,10 @@ microsoft/ebcdic/cp1026.txt			EBCDIC 1026
 #microsoft/mac/latin2.txt			MacLatin2
 #microsoft/mac/roman.txt			MacRoman
 #microsoft/mac/turkish.txt			MacTurkish
+
+ibm/424.txt							IBM EBCDIC 424 (Hebrew)
+ibm/856.txt							IBM code page 856 (Hebrew)
+ibm/1006.txt						IBM code page 1006 (Arabic)
 
 microsoft/pc/cp437.txt				Microsoft code page 437 (US)
 microsoft/pc/cp720.txt				Microsoft code page 720 (Arabic)
