@@ -244,6 +244,14 @@ module Fiddlybits
             end
 
             add_to_table(root, bytes, node)
+          elsif line =~ /^include (\S+)$/
+            include_file = $1
+            include_table_data = parse(File.join(File.dirname(file), include_file))
+            # As long as we only use include for subsets we will never need to implement merging the data.
+            raise "include is currently only supported if you do it before any other mappings exist" if !root.empty?
+            root = include_table_data.root.dup
+            min_bytes_per_char = include_table_data.min_bytes_per_char
+            max_bytes_per_char = include_table_data.max_bytes_per_char
           else
             raise "Couldn't parse line: [#{line}] in file: #{file}"
           end

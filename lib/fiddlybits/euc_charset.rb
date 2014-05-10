@@ -68,6 +68,23 @@ module Fiddlybits
       state.bytes = state.bytes[size..-1]
     end
 
+# CN-GB seems the same as EUC-CN?
+
+#TODO Needs GB_12345_90
+#    CN_GB_12345 = EucCharset.new(
+#      'CN-GB-12345:1990',
+#      {
+#        g0: AsciiCharset::US_ASCII,
+#        g1: TableCharset::GB_12345_90
+#      })
+
+    CN_GC_ISOIR165 = EucCharset.new(
+      'CN-GB-ISOIR165:1992',
+      {
+        g0: AsciiCharset::US_ASCII,
+        g1: TableCharset::ISO_IR_165
+      })
+
     EUC_CN = EucCharset.new(
       'EUC-CN',
       {

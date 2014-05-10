@@ -3,6 +3,10 @@
 
 # For more data:
 # http://www.unicode.org/Public/MAPPINGS/
+# http://itscj.ipsj.or.jp/ISO-IR/
+# http://www.faqs.org/rfcs/rfc1345.html
+# http://www.columbia.edu/kermit/csettables.html
+# http://kanji.zinbun.kyoto-u.ac.jp/~yasuoka/CJK.html
 
 # ICU's list of mappings from various names:
 # http://source.icu-project.org/repos/icu/icu/trunk/source/data/mappings/convrtrs.txt
@@ -12,6 +16,58 @@
 
 # http://www.asahi-net.or.jp/~ax2s-kmtn/character/asia.html
 
+# ISO/IEC 646 compliant encodings.
+iso-646/646-inv.txt					ISO 646-INV
+iso-646/646-irv-1983.txt			ISO 646-IRV:1983
+iso-646/646-irv-1991.txt			ISO 646-IRV:1991
+iso-646/646-ca-1.txt				ISO 646-CA-1		# CSA_Z243.4-1985-1
+iso-646/646-ca-2.txt				ISO 646-CA-2		# CSA Z243.4-1985-2
+iso-646/646-cn.txt					ISO 646-CN			# GB/T 1988-80
+iso-646/646-cu.txt					ISO 646-CU			# NC 99-10:81
+iso-646/646-de.txt					ISO 646-DE			# DIN 66003
+iso-646/646-dk.txt					ISO 646-DK			# DS 2089
+iso-646/646-es.txt					ISO 646-ES
+iso-646/646-es-2.txt				ISO 646-ES-2
+iso-646/646-fi.txt					ISO 646-FI			# SFS 4017
+iso-646/646-fr.txt					ISO 646-FR			# AFNOR NF Z 62010-1982  NF_Z_62-010
+iso-646/646-fr-0.txt				ISO 646-FR-0		# AFNOR NF Z 62010-1973  NF_Z_62-010_(1973)
+iso-646/646-gb.txt					ISO 646-GB			# BS 4730
+iso-646/646-hu.txt					ISO 646-HU			# MSZ 7795/3
+iso-646/646-ie.txt					ISO 646-IE			# NSAI 433:1996
+iso-646/646-is.txt					ISO 646-IS
+iso-646/646-it.txt					ISO 646-IT
+iso-646/646-jp.txt					ISO 646-JP			# JIS C 6220-1969
+iso-646/646-jp-ocr-b.txt			ISO 646-JP-OCR-B	# JIS C 6229-1984-b
+iso-646/646-kr.txt					ISO 646-KR			# KS C 5636-1989
+iso-646/646-mt.txt					ISO 646-MT
+iso-646/646-no.txt					ISO 646-NO			# NS 4551-1
+iso-646/646-no-2.txt				ISO 646-NO-2		# NS 4551-2
+iso-646/646-fi.txt					ISO 646-SE			# SFS 4017 / SEN_850200_B		duplicated until aliases are sorted out
+iso-646/646-pt.txt					ISO 646-PT
+iso-646/646-pt-2.txt				ISO 646-PT-2
+iso-646/646-se-c.txt				ISO 646-SE-C		# SEN 85 02 00 Annex C
+iso-646/646-tw.txt					ISO 646-TW			# CNS 5205-1996
+iso-646/646-irv-1991.txt			US-ASCII			# ISO 646-US					duplicated until aliases are sorted out
+iso-646/646-yu.txt					ISO 646-YU			# JUS I.B1.002, YUSCII
+#TODO some places mention these, but it's unclear what they are:
+#   646-esp
+#	646-DK-SE
+#	646-FI-SE
+#	646-ita
+#	646-por
+#	646-IS
+
+#TODO Conflicting information about T.61, Wikipedia says it's an ISO 646 on the ISO 646 page but the T.61 page shows it being 8-bit, so there must be two.
+# T.61-7bit based on ISO 646
+# T.61-8bit which might be a superset
+
+# ASCII variants which are *not* ISO 646 compliant.
+elot/elot-927.txt					ELOT 927			# ISO-IR-088
+koi/koi7.txt						KOI7
+#TODO si/si-960.txt					SI 960
+asmo/asmo-449.txt					ASMO 449
+
+# 8-bit encodings as extensions to US-ASCII
 iso-8859/8859-1-1998.txt			ISO 8859-1:1998
 iso-8859/8859-2-1999.txt			ISO 8859-2:1999
 iso-8859/8859-3-1999.txt			ISO 8859-3:1999
@@ -56,9 +112,14 @@ eastasia/gb-2312-1980.txt			GB 2312-80
 #HKSCS-2001
 #HKSCS-2004
 eastasia/cns-11643-1986-plane1.txt	CNS 11643-1986 plane 1
-eastasia/cns-11643-1986-plane2.txt	CNS 11643-1986 plane 2
+eastasia/cns-11643-1986-plane2.txt	CNS 11643-1986 plane 2 #TODO did CNS 11643-1992 change 1&2?
+eastasia/cns-11643-1992-plane3.txt	CNS 11643-1992 plane 3
+eastasia/cns-11643-1992-plane4.txt	CNS 11643-1992 plane 4
+eastasia/cns-11643-1992-plane5.txt	CNS 11643-1992 plane 5
+eastasia/cns-11643-1992-plane6.txt	CNS 11643-1992 plane 6
+eastasia/cns-11643-1992-plane7.txt	CNS 11643-1992 plane 7
 #									CNS 11643-1986 plane 14 goes here
-#CNS 11643-1992
+eastasia/iso-ir-165.txt				ISO-IR-165
 
 koi/koi8-r.txt						KOI8-R
 koi/koi8-u.txt						KOI8-U

@@ -169,26 +169,24 @@ module Fiddlybits
         single_shift(2)
       ])
 
-    #TODO ISO-2022-CN-EXT. Lacking the character sets to implement it.
-#      ISO_2022_CN_EXT = ISO_2022_CN.new_extension(
-#        'ISO-2022-CN-EXT',
-#        [
-          # These additional sequences are standardised in advance of ISO-IR having mappings for them.
-          # But it doesn't have mappings as of 2014 and I suppose it's unlikely they will ever be added. :)
-          #designate_set(2, "\e$*<X7589>", GB 7589-87),
-          #designate_set(3, "\e$+<X7590>", GB 7590-87),
-          #designate_set(1, "\e$)<X12345>", GB 12345-90),
-          #designate_set(2, "\e$*<X13131>", GB 13131-91),
-          #designate_set(3, "\e$+<X13132>", GB 13132-91),
- #         designate_set(1, "\e$)E", TableCharset::ISO_IR_165),
- #         designate_set(3, "\e$+I", TableCharset::CNS_11643_1992_PLANE_3),
- #         designate_set(3, "\e$+J", TableCharset::CNS_11643_1992_PLANE_4),
- #         designate_set(3, "\e$+K", TableCharset::CNS_11643_1992_PLANE_5),
- #         designate_set(3, "\e$+L", TableCharset::CNS_11643_1992_PLANE_6),
- #         designate_set(3, "\e$+M", TableCharset::CNS_11643_1992_PLANE_7),
- #         single_shift(3)
- #       ])
-
+    ISO_2022_CN_EXT = ISO_2022_CN.new_extension(
+      'ISO-2022-CN-EXT',
+      [
+        # These additional sequences are standardised in advance of ISO-IR having mappings for them.
+        # But it doesn't have mappings as of 2014 and I suppose it's unlikely they will ever be added. :)
+        #designate_set(2, "\e$*<X7589>", GB 7589-87),
+        #designate_set(3, "\e$+<X7590>", GB 7590-87),
+        #designate_set(1, "\e$)<X12345>", GB 12345-90),
+        #designate_set(2, "\e$*<X13131>", GB 13131-91),
+        #designate_set(3, "\e$+<X13132>", GB 13132-91),
+        designate_set(1, "\e$)E", TableCharset::ISO_IR_165),
+        designate_set(3, "\e$+I", TableCharset::CNS_11643_1992_PLANE_3),
+        designate_set(3, "\e$+J", TableCharset::CNS_11643_1992_PLANE_4),
+        designate_set(3, "\e$+K", TableCharset::CNS_11643_1992_PLANE_5),
+        designate_set(3, "\e$+L", TableCharset::CNS_11643_1992_PLANE_6),
+        designate_set(3, "\e$+M", TableCharset::CNS_11643_1992_PLANE_7),
+        single_shift(3)
+      ])
 
     ISO_2022_JP = Iso2022Charset.new(
       'ISO-2022-JP',
