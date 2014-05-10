@@ -116,7 +116,7 @@ module Fiddlybits
     end
 
     def self.start_as_ascii_only
-      proc { |s| s.g0 = AsciiCharset::US_ASCII; s.gl = :g0 }
+      proc { |s| s.g0 = TableCharset::US_ASCII; s.gl = :g0 }
     end
 
     def self.shift_out
@@ -192,7 +192,7 @@ module Fiddlybits
       'ISO-2022-JP',
       start_as_ascii_only,
       [
-        designate_set(0, "\e(B", AsciiCharset::US_ASCII),
+        designate_set(0, "\e(B", TableCharset::US_ASCII),
         designate_set(0, "\e(J", TableCharset::JIS_X_0201_1976_ROMAN),
         designate_set(0, "\e$@", TableCharset::JIS_X_0208_1978),
         designate_set(0, "\e$B", TableCharset::JIS_X_0208_1983)

@@ -72,21 +72,21 @@ module Fiddlybits
     EUC_CN = EucCharset.new(
       'EUC-CN:1980',
       {
-        g0: AsciiCharset::US_ASCII,
+        g0: TableCharset::US_ASCII,
         g1: TableCharset::GB_2312_80
       })
 
     CN_GB_12345 = EucCharset.new(
       'CN-GB-12345:1990',
       {
-        g0: AsciiCharset::US_ASCII,
+        g0: TableCharset::US_ASCII,
         g1: TableCharset::GB_T_12345_90
       })
 
     CN_GC_ISOIR165 = EucCharset.new(
       'CN-GB-ISOIR165:1992',
       {
-        g0: AsciiCharset::US_ASCII,
+        g0: TableCharset::US_ASCII,
         g1: TableCharset::ISO_IR_165
       })
 
@@ -104,7 +104,7 @@ module Fiddlybits
       'EUC-KR:1992',
       {
         #TODO some sources say KS X 1003 which is actually a different charset ISO 646-KR. who is right?
-        g0: AsciiCharset::US_ASCII,
+        g0: TableCharset::US_ASCII,
         # defined as 1987 in standards but 1992 is the same set. TODO: charset name aliases would improve this.
         g1: TableCharset::KS_X_1001_1992
       })

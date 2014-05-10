@@ -38,7 +38,7 @@ iso-646/646-is.txt					ISO 646-IS
 iso-646/646-it.txt					ISO 646-IT
 iso-646/646-jp.txt					ISO 646-JP			# JIS C 6220-1969
 iso-646/646-jp-ocr-b.txt			ISO 646-JP-OCR-B	# JIS C 6229-1984-b
-iso-646/646-kr.txt					ISO 646-KR			# KS C 5636-1989
+iso-646/646-kr.txt					ISO 646-KR			# KS C 5636-1989, KS X 1003-1993, KS X 1003-1989
 iso-646/646-mt.txt					ISO 646-MT
 iso-646/646-no.txt					ISO 646-NO			# NS 4551-1
 iso-646/646-no-2.txt				ISO 646-NO-2		# NS 4551-2
@@ -86,18 +86,28 @@ iso-8859/8859-14-1998.txt			ISO 8859-14:1998
 iso-8859/8859-15-1999.txt			ISO 8859-15:1999
 iso-8859/8859-16-2001.txt			ISO 8859-16:2001
 
-eastasia/gb-2312-1980.txt			GB 2312-80
+koi/koi8-r.txt						KOI8-R
+koi/koi8-u.txt						KOI8-U
+
+# China (PRC)
+eastasia/gb-2312-1980.txt			GB 2312-80		# aka GB, GB0
+#TODO								GB/T 7589-87	# aka GB2
+#TODO								GB/T 7590-87	# aka GB4
+#TODO								GB 8565.2-88
 eastasia/gb-t-12345-1990.txt		GB/T 12345-90	# aka GB1
-#(GB2) GB 7589-87
-#(GB3) GB/T 13131-91
-#(GB4) GB 7590-87
-#(GB5) GB/T 13132-91
-#GBK
-#GB18030-2000
-#GB18030-2005
+#TODO								GB/T 13131-91	# aka GB3
+#TODO								GB/T 13132-91	# aka GB5
+eastasia/iso-ir-165.txt				ISO-IR-165
+#TODO								GB 13000.1-93
+#TODO								GBK
+#TODO								GB/T 15564-1995
+#TODO								GB/T 16500-1998
+#TODO								GB 18030-2000
+#TODO								GB 18030-2005
 
-#GB12052-89 (Korean standard by China)
+#TODO								GB 12052-89 (Korean standard by PRC)
 
+# Taiwan
 #CCCII-1980
 #CCCII-1981
 #CCCII-1985
@@ -119,11 +129,8 @@ eastasia/cns-11643-1992-plane5.txt	CNS 11643-1992 plane 5
 eastasia/cns-11643-1992-plane6.txt	CNS 11643-1992 plane 6
 eastasia/cns-11643-1992-plane7.txt	CNS 11643-1992 plane 7
 #									CNS 11643-1986 plane 14 goes here
-eastasia/iso-ir-165.txt				ISO-IR-165
 
-koi/koi8-r.txt						KOI8-R
-koi/koi8-u.txt						KOI8-U
-
+# Japan
 eastasia/jisx-0201-1976-kana.txt	JIS X 0201-1976 kana
 eastasia/jisx-0201-1976-roman.txt	JIS X 0201-1976 roman
 eastasia/jisx-0201-1976.txt			JIS X 0201-1976
@@ -136,20 +143,15 @@ eastasia/jisx-0213-2000-plane2.txt	JIS X 0213-2000 plane 2
 eastasia/jisx-0213-2004.txt			JIS X 0213-2004
 eastasia/shift-jis.txt				Shift JIS
 
-eastasia/ksx-1001-1992.txt			KS X 1001-1992
-
-
-
-# KS X 1001-1974 - ???
-# KS X 1001-1982 - added appendix with hangul as 5-bit per jamo code in 16 (actually 15) bits?
-# KS X 1001-1992 - 16-bit code becomes part of the main format which now also includes hanja
-#				 - alias: 1986 <=> 1987 <=> 1989 <=> 1992
-# KS X 1001-1998 - added euro sign, registered trademark sign
-# KS X 1001-2002 - added postal sign
+# South Korea
 # alias: KS C 5601-* <=> KS X 1001-*
-
-# KS X 1002-1991 - ???
+#TODO								KS X 1001-1974 - ???
+#TODO								KS X 1001-1982 - added appendix with hangul as 5-bit per jamo code in 16 (actually 15) bits?
+eastasia/ksx-1001-1992.txt			KS X 1001-1992		# = 1989 = 1987 = 1986
+#TODO								KS X 1001-1998 - added euro sign, registered trademark sign
+#TODO								KS X 1001-2002 - added postal sign
 # alias: KS C 5657-* <=> KS X 1002-*
+#TODO								KS X 1002-1991 - ???
 
 # KS X 1003-1993 - aka KS-Roman, ISO-646-KR, ECMA-6 - ASCII with \ replaced by the won sign
 #				 - alias: 1989 <=> 1993
@@ -159,11 +161,13 @@ eastasia/ksx-1001-1992.txt			KS X 1001-1992
 #KS C 5619-1982 enumerated 51 hangul elements, 1,316 pre-combined hangul, and 1,672 hanja.
 #KIPS (Korean Information Processing System) enumerated 2,058 pre-combined hangul and 2,392 hanja.
 
+# North Korea
 #KPS 9566-97
 #KPS 9566-2000
 #KPS 10721-2000
 #eastasia/kps-9566-2003.txt			KPS 9566-2003
 
+# Apple
 apple/arabic.txt					Mac OS Arabic
 apple/celtic.txt					Mac OS Celtic
 apple/centeuro.txt					Mac OS Central European
