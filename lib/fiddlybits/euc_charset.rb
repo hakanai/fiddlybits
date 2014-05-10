@@ -68,15 +68,20 @@ module Fiddlybits
       state.bytes = state.bytes[size..-1]
     end
 
-# CN-GB seems the same as EUC-CN?
+    # aka CN-GB
+    EUC_CN = EucCharset.new(
+      'EUC-CN:1980',
+      {
+        g0: AsciiCharset::US_ASCII,
+        g1: TableCharset::GB_2312_80
+      })
 
-#TODO Needs GB_12345_90
-#    CN_GB_12345 = EucCharset.new(
-#      'CN-GB-12345:1990',
-#      {
-#        g0: AsciiCharset::US_ASCII,
-#        g1: TableCharset::GB_12345_90
-#      })
+    CN_GB_12345 = EucCharset.new(
+      'CN-GB-12345:1990',
+      {
+        g0: AsciiCharset::US_ASCII,
+        g1: TableCharset::GB_T_12345_90
+      })
 
     CN_GC_ISOIR165 = EucCharset.new(
       'CN-GB-ISOIR165:1992',
@@ -85,15 +90,8 @@ module Fiddlybits
         g1: TableCharset::ISO_IR_165
       })
 
-    EUC_CN = EucCharset.new(
-      'EUC-CN',
-      {
-        g0: AsciiCharset::US_ASCII,
-        g1: TableCharset::GB_2312_80
-      })
-
     EUC_JP = EucCharset.new(
-      'EUC-JP',
+      'EUC-JP:1990',
       {
         g0: TableCharset::JIS_X_0201_1976_ROMAN,
         g1: TableCharset::JIS_X_0208_1990,
@@ -103,7 +101,7 @@ module Fiddlybits
 
     # aka KS X 2901 aka RFC 1557
     EUC_KR = EucCharset.new(
-      'EUC-KR',
+      'EUC-KR:1992',
       {
         #TODO some sources say KS X 1003 which is actually a different charset ISO 646-KR. who is right?
         g0: AsciiCharset::US_ASCII,
@@ -111,7 +109,7 @@ module Fiddlybits
         g1: TableCharset::KS_X_1001_1992
       })
 
-    #TODO EUC_TW
+    #TODO EUC_TW. The real problem with this one is the CNS 11643 set itself and our incomplete information about the version history.
     # EUC_TW = EucCharset.new(
     #   'EUC-TW',
     #   {

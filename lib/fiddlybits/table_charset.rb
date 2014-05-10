@@ -274,7 +274,7 @@ module Fiddlybits
         path = $1
         human_name = $2
 
-        const_name = $2.gsub(/\([^\)]+\)/, '').gsub(/[\s\-:]/, '_').strip.upcase.to_sym
+        const_name = $2.gsub(/\([^\)]+\)/, '').gsub(/[\s\-\/:]/, '_').strip.upcase.to_sym
         full_path = File.join(charsets_data, path)
         TableCharset.const_set(const_name, TableCharset.new(human_name, TextFormat::INSTANCE, full_path))
       end
