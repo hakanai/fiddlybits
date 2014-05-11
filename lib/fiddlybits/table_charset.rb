@@ -46,6 +46,19 @@ module Fiddlybits
       end
     end
 
+    # Explanation object for table lookups
+    class TableLookup
+      include Immutable
+
+      attr_reader :charset
+      attr_reader :bytes
+
+      def initialize(charset, bytes)
+        @charset = charset.freeze
+        @bytes = bytes.freeze
+      end
+    end
+
     def initialize(human_name, format, file)
       super(human_name)
 
@@ -88,14 +101,16 @@ module Fiddlybits
           if node.is_a?(String)
             # terminal node
             decoded_bytes = bytes[0..i]
-            decode_result << DecodedData.new(decoded_bytes, node, 'table lookup')
+            decode_result << DecodedData.new(decoded_bytes, node,
+                                             TableLookup.new(self, decoded_bytes))
             bytes = bytes[i+1..-1]
             break
           elsif node.is_a?(DirectionalString)
             # terminal node
             decoded_bytes = bytes[0..i]
-            decode_result << DecodedData.new(decoded_bytes, node.string, 'table lookup',
-                                                 direction: node.direction)
+            decode_result << DecodedData.new(decoded_bytes, node.string,
+                                             TableLookup.new(self, decoded_bytes),
+                                             direction: node.direction)
             bytes = bytes[i+1..-1]
             break
           elsif node.is_a?(Array)

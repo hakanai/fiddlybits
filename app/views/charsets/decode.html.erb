@@ -31,7 +31,7 @@
     <tbody>
       <% @result.each do |fragment| %>
         <tr>
-          <td><%= fragment.bytes %></td>
+          <td><%= fragment.bytes.map { |b| "%02X" % b }.join(' ') %></td>
           <% if fragment.is_a?(Fiddlybits::Charset::DecodedData) %>
             <td>
               <% fragment.string.codepoints.each_with_index do |cp, index| -%>
@@ -45,7 +45,15 @@
                 (right-to-left)
               <% end %>
             </td>
-            <td><%= fragment.explanation %></td>
+            <td>
+              <% if fragment.explanation.is_a?(Fiddlybits::TableCharset::TableLookup) %>
+                <%= link_to 'table lookup', action: 'show_table',
+                                            charset: fragment.explanation.charset.name,
+                                            anchor: "cell-#{fragment.explanation.bytes.map{|b| "%02X" % b}.join}" %>
+              <% else %>
+                <%= fragment.explanation %>
+              <% end %>
+            </td>
           <% elsif fragment.is_a?(Fiddlybits::Charset::EscapeSequence) %>
             <td><%= fragment.code %></td>
             <td><%= fragment.explanation %></td>
