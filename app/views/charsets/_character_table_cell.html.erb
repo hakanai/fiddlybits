@@ -8,22 +8,17 @@
   <% cell_id = "cell-#{cell.bytes.map{|x| '%02X' % x}.join}" %>
   <td class="table-entry <%= printable_class %>" id="<%= cell_id %>">
     <span class="character"><%= cell.string %></span>
-
-    <% cell.string.codepoints.each_with_index do |cp, index| -%>
-      <% if index > 0 %><br/><% end %>
-
-
-      <% code_point = UnicodeUtils::Codepoint.new(cp) %>
-      <span class="uplus"><%= code_point.uplus %></span>
-
-      <%# TODO hover-over to show more info %>
-      <%#= code_point.name %>
-    <% end %>
-    <% if cell.direction == :ltr %>
-      <span class="dir">(ltr)</span>
-    <% elsif cell.direction == :rtl %>
-      <span class="dir">(rtl)</span>
-    <% end %>
+    <span class="info"><%
+      cell.string.codepoints.each_with_index do |cp, index|
+        code_point = UnicodeUtils::Codepoint.new(cp)
+        if index > 0
+          %><br/><%
+        end %><%= code_point.uplus -%>
+      <% end -%>
+      <% if cell.direction == :ltr %><br/>(ltr)<% elsif cell.direction == :rtl %><br/>(rtl)</span><% end -%>
+    </span>
+    <%# TODO hover-over to show more info -%>
+    <%#= code_point.name -%>
   </td>
 <% else %>
   <td class="blank-entry">&nbsp;</td>

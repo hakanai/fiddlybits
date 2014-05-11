@@ -10,6 +10,10 @@
 	-o-transform: $transform;
 }
 
+table.character-table tr {
+	vertical-align: top;
+}
+
 td.table-entry:target {
 	outline: 3px solid rgb(0,192,192);
 }
@@ -57,7 +61,7 @@ span.character {
 	margin: auto;
 }
 
-span.uplus, span.dir {
+span.info {
 	display: block;
 	text-align: center;
 	color: rgb(80,80,80);
