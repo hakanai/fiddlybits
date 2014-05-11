@@ -3,6 +3,10 @@ crumb :root do
   link "Fiddlybits", root_path
 end
 
+crumb :about do
+  link "About", url_for(controller: 'welcome', action: 'about')
+end
+
 crumb :encodings do
   link "Binary Encodings", url_for(controller: 'encodings', action: 'index')
 end

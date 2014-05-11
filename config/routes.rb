@@ -4,6 +4,8 @@ Fiddlybits::Application.routes.draw do
 
   root 'welcome#index'
 
+  get 'about' => 'welcome#about'
+
   get 'charsets' => 'charsets#index'
   get 'charsets/:id' => 'charsets#show'
   get 'charsets/:id/decode' => 'charsets#decode'
