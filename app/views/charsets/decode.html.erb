@@ -1,6 +1,6 @@
 <%= form_for(:form, method: 'GET') do |f| %>
   <p>
-    Data to decode:<br/>
+    Data to decode using <%= @charset.human_name %>:<br/>
     <%= f.text_area(:data, rows: 16, cols: 80) %>
   </p>
 
@@ -8,11 +8,6 @@
     Treat input as:
     <label><%= f.radio_button(:type, 'text') %>Raw Text</label>
     <label><%= f.radio_button(:type, 'hex') %>Binary as Hex</label>
-  </p>
-
-  <p>
-    Decode using charset:
-    <%= f.collection_select(:charset, @charsets, :name, :name) %>
   </p>
 
   <p>

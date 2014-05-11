@@ -8,8 +8,8 @@ module Fiddlybits
     # Delegating charset implementation allows us to treat charsets like ISO-8859-1
     # such that low bytes will decode as if they were high bytes.
     class HighPartOnlyCharset < Charset
-      def initialize(name, delegate)
-        @name = name
+      def initialize(human_name, delegate)
+        @human_name = human_name
         @delegate = delegate
       end
 
@@ -23,8 +23,8 @@ module Fiddlybits
       def max_bytes_per_char; 1; end
     end
 
-    def initialize(name, initial_state, rules)
-      super(name)
+    def initialize(human_name, initial_state, rules)
+      super(human_name)
       @initial_state = initial_state
       # Convert sequences to bytes in advance because we're doing all operations on lists of bytes.
       rules.each do |rule|
@@ -38,9 +38,9 @@ module Fiddlybits
     # Derives a new charset which has all the rules of this charset plus some additional rules.
     # Reduces repetition in the rule definitions but also makes the definitions look more like
     # what you would see in a description of each charset.
-    def new_extension(name, additional_rules)
+    def new_extension(human_name, additional_rules)
       rules = @rules + additional_rules
-      Iso2022Charset.new(name, @initial_state, rules)
+      Iso2022Charset.new(human_name, @initial_state, rules)
     end
 
     def decode(data)

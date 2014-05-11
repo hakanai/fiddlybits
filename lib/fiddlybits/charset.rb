@@ -81,11 +81,15 @@ module Fiddlybits
       end
     end
 
-    # The display name of the charset.
+    # A short name of the charset used for things like URLs.
     attr_reader :name
 
-    def initialize(name)
-      @name = name.freeze
+    # The display name of the charset.
+    attr_reader :human_name
+
+    def initialize(human_name)
+      @name = human_name.gsub(/\([^\)]+\)/, '').gsub(/[\s\-\/:]/, '-').strip.downcase.freeze
+      @human_name = human_name.freeze
     end
   end
 end

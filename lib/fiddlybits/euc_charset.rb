@@ -5,8 +5,8 @@ module Fiddlybits
 
   class EucCharset < Charset
 
-    def initialize(name, sets)
-      super(name)
+    def initialize(human_name, sets)
+      super(human_name)
       #TODO Should be deep frozen but TableCharset isn't immutable and immutable+lazy things are difficult.
       @sets = sets.freeze
     end

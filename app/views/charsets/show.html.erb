@@ -1,0 +1,10 @@
+<h1><%= @charset.human_name %></h1>
+
+<ul>
+  <li><%= link_to 'Decode data using this charest', :action => 'decode' %></li>
+  <% if @charset.respond_to?(:min_bytes_per_char) &&
+        @charset.min_bytes_per_char == 1 &&
+        @charset.max_bytes_per_char == 1 %>
+    <li><%= link_to 'View charset table', :action => 'show_table' %></li>
+  <% end %>
+</ul>

@@ -4,7 +4,11 @@ Fiddlybits::Application.routes.draw do
 
   root 'welcome#index'
 
-  get 'charsets/:action' => 'charsets#:action'
+  get 'charsets' => 'charsets#index'
+  get 'charsets/:charset' => 'charsets#show'
+  get 'charsets/:charset/decode' => 'charsets#decode'
+  get 'charsets/:charset/table' => 'charsets#show_table'
+
   get 'encodings/:action' => 'encodings#:action'
 
 

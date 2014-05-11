@@ -165,7 +165,6 @@ DEPENDENCIES
   capistrano-rails (~> 1.1)
   capistrano-rbenv (~> 2.0)
   capistrano3-unicorn
-  coffee-rails (~> 4.0.0)
   debugger
   exception_notification
   hamster

@@ -1,0 +1,30 @@
+<%#
+ % Locals:
+ %   charset - the charset being used
+ %   cell    - the cell data to render
+ %>
+<% if cell.is_a?(Fiddlybits::Charset::DecodedData) %>
+  <% printable_class = cell.string =~ /[^[:print:]]/ ? 'non-printable' : 'printable' %>
+  <% cell_id = "cell-#{cell.bytes.map{|x| '%02X' % x}.join}" %>
+  <td class="table-entry <%= printable_class %>" id="<%= cell_id %>">
+    <span class="character"><%= cell.string %></span>
+
+    <% cell.string.codepoints.each_with_index do |cp, index| -%>
+      <% if index > 0 %><br/><% end %>
+
+
+      <% code_point = UnicodeUtils::Codepoint.new(cp) %>
+      <span class="uplus"><%= code_point.uplus %></span>
+
+      <%# TODO hover-over to show more info %>
+      <%#= code_point.name %>
+    <% end %>
+    <% if cell.direction == :ltr %>
+      <span class="dir">(ltr)</span>
+    <% elsif cell.direction == :rtl %>
+      <span class="dir">(rtl)</span>
+    <% end %>
+  </td>
+<% else %>
+  <td class="blank-entry">&nbsp;</td>
+<% end %>

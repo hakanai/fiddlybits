@@ -1,3 +1,66 @@
 // Place all the styles related to the charsets controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@mixin transform($transform) {
+	transform: $transform;
+	-webkit-transform: $transform;
+	-moz-transform: $transform;
+	-ms-transform: $transform;
+	-o-transform: $transform;
+}
+
+td.table-entry:target {
+	outline: 3px solid rgb(0,192,192);
+}
+
+td.table-entry {
+	
+}
+
+thead th {
+	padding-bottom: 1em;
+}
+
+tbody th {
+	padding-left: 1em;
+	padding-right: 1em;
+}
+
+th.column-group-header, th.row-group-header {
+	letter-spacing: 0.25em;
+	padding: 0;
+}
+th.row-group-header {
+	@include transform(translate(0.5em, 3.5em) rotate(-90deg));
+	max-width: 1.5em; // workaround for transform not rotating the box itself
+	white-space: nowrap; // workaround for max-width applying to wrapping
+	padding: 0;
+}
+
+td.table-entry.non-printable {
+	background-color: rgb(232,232,232);
+}
+
+td.blank-entry {
+	background-color: rgb(200,200,200);
+}
+
+span.character {
+	display: block;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 200%;
+	width: 1.5em;
+	height: 1.5em;
+	border: 1px solid rgb(160,160,160);
+	margin: auto;
+}
+
+span.uplus, span.dir {
+	display: block;
+	text-align: center;
+	color: rgb(80,80,80);
+	margin: auto;
+}
+

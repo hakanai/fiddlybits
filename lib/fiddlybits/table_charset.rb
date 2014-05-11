@@ -46,8 +46,8 @@ module Fiddlybits
       end
     end
 
-    def initialize(name, format, file)
-      super(name)
+    def initialize(human_name, format, file)
+      super(human_name)
 
       @format = format.freeze
       @file = file.freeze

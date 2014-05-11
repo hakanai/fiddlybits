@@ -1,0 +1,5 @@
+<ul>
+  <% @charsets.each do |charset| %>
+    <li><%= link_to charset.human_name, :action => 'show', :charset => charset.name %></li>
+  <% end %>
+</ul>

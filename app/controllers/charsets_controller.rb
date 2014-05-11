@@ -1,12 +1,19 @@
 class CharsetsController < ApplicationController
-  def decode
-    @form = OpenStruct.new(params[:form])
+  def index
     @charsets = Fiddlybits::CharsetRegistry.find_all
+  end
 
-    @charset = nil
-    if !@form[:charset].blank?
-      @charset = Fiddlybits::CharsetRegistry.find_by_name(@form[:charset]) || (redirect_to(root_path); return)
-    end
+  def show
+    @charset = charset_from_params || return
+  end
+
+  def show_table
+    @charset = charset_from_params || return
+  end
+
+  def decode
+    @charset = charset_from_params || return
+    @form = OpenStruct.new(params[:form])
 
     if !@form.data.blank?
       data = @form.data
@@ -16,5 +23,11 @@ class CharsetsController < ApplicationController
 
       @result = @charset.decode(data)
     end
+  end
+
+private
+
+  def charset_from_params
+    Fiddlybits::CharsetRegistry.find_by_name(params[:charset]) || (redirect_to(:action => 'index'); nil)
   end
 end

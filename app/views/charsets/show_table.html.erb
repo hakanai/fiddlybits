@@ -1,0 +1,65 @@
+<h1><%= @charset.human_name %> Mapping Table</h1>
+
+<% if @charset.min_bytes_per_char != @charset.max_bytes_per_char %>
+  <% raise NotImplementedError # tricky case where we'd have to do multi-level table pages %>
+<% elsif @charset.min_bytes_per_char == 1 %>
+
+  <%
+    # Building up the table data.
+    firstrow = lastrow = firstcol = lastcol = nil
+    rows = {}
+    (0..15).each do |y|
+      row = {}
+      (0..15).each do |x|
+        b = y * 16 + x
+        data = @charset.decode([b])
+        raise NotImplementedError if data.size > 1 # I don't think this should happen
+        fragment = data[0]
+        if fragment.is_a?(Fiddlybits::Charset::DecodedData)
+          row[x] = fragment
+          firstcol = x if !firstcol || x < firstcol
+          lastcol = x if !lastcol || x > lastcol
+        end
+      end
+      if !row.empty?
+        rows[y] = row
+        firstrow = y if !firstrow || y < firstrow
+        lastrow = y if !lastrow || y > lastrow
+      end
+    end
+  %>
+
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+        <th class="column-group-header" colspan="<%= lastcol - firstcol + 1 %>">Second Nibble</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th></th>
+        <% (firstcol..lastcol).each do |x| %>
+          <th><%= x.to_s(16) %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% (firstrow..lastrow).each do |y| %>
+        <tr>
+          <% if y == firstrow %>
+            <th class="row-group-header" rowspan="<%= lastrow - firstrow + 1 %>">First Nibble</th>
+          <% end %>
+          <th><%= y.to_s(16) %></th>
+          <% (firstcol..lastcol).each do |x| %>
+            <%= render partial: 'character_table_cell', locals: { charset: @charset, cell: rows[y][x] } %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% elsif @charset.min_bytes_per_char == 2 %>
+  <% raise NotImplementedError # less tricky case where we'd use one byte on X and one byte on Y %>
+<% else %>
+  <% raise NotImplementedError # not sure how to represent these %>
+<% end %>
