@@ -89,5 +89,9 @@ Fiddlybits::Application.configure do
       :exception_recipients => %w{exceptions@fiddlybits.org}
     }
 
+  # Google Analytics
+  GA.tracker = "UA-50861148-1"
 end
+
+
 

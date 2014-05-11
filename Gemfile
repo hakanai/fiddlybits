@@ -40,6 +40,9 @@ gem 'unicorn'
 # Exception reporting
 gem 'exception_notification'
 
+# Statistics
+gem 'google-analytics-rails'
+
 # Breadcrumb management
 gem 'gretel'
 

@@ -64,6 +64,7 @@ GEM
       actionmailer (>= 3.0.4)
       activesupport (>= 3.0.4)
     execjs (2.0.2)
+    google-analytics-rails (0.0.5)
     gretel (3.0.6)
       rails (>= 3.2.0)
     hamster (0.4.3)
@@ -169,6 +170,7 @@ DEPENDENCIES
   capistrano3-unicorn
   debugger
   exception_notification
+  google-analytics-rails
   gretel
   hamster
   jbuilder (~> 1.2)
