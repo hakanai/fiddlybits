@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>Fiddlybits</title>
-    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag "application", media: "all" %>
+    <%= javascript_include_tag "application" %>
     <%= analytics_init if Rails.env.production? %>
     <%= csrf_meta_tags %>
     <% if content_for :page_scripts %>
@@ -16,7 +16,7 @@
         <%= link_to 'About', controller: 'welcome', action: 'about' %>
         <!--Bugs -->
       </div>
-      <div id="share-button-top" class="share-button share-button-top"></div>
+      <%= share_button %>
       <h1>Fiddlybits <span style="color: rgb(128,160,160)">wants a logo :'(</span></h1>
     </header>
 
