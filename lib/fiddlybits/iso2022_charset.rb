@@ -226,7 +226,7 @@ module Fiddlybits
     ISO_2022_JP_2004 = ISO_2022_JP_3.new_extension(
       'ISO-2022-JP-2004',
       [
-        designate_set(0, "\e$(Q", TableCharset::JIS_X_0213_2004)
+        designate_set(0, "\e$(Q", TableCharset::JIS_X_0213_2004_PLANE_1)
       ])
 
     ISO_2022_KR = Iso2022Charset.new(

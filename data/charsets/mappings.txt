@@ -140,7 +140,8 @@ eastasia/jisx-0208-1990.txt			JIS X 0208-1990
 eastasia/jisx-0212-1990.txt			JIS X 0212-1990
 eastasia/jisx-0213-2000-plane1.txt	JIS X 0213-2000 plane 1
 eastasia/jisx-0213-2000-plane2.txt	JIS X 0213-2000 plane 2
-eastasia/jisx-0213-2004.txt			JIS X 0213-2004
+eastasia/jisx-0213-2004-plane1.txt	JIS X 0213-2004 plane 1
+eastasia/jisx-0213-2004-plane2.txt	JIS X 0213-2004 plane 2
 eastasia/shift-jis.txt				Shift JIS
 
 # South Korea
