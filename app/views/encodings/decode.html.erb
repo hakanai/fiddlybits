@@ -1,12 +1,9 @@
+<% breadcrumb :encoding_decode, @encoding %>
+
 <%= form_for(:form, method: 'GET') do |f| %>
   <p>
     Data to decode:<br/>
     <%= f.text_area(:data, rows: 16, cols: 60) %>
-  </p>
-
-  <p>
-    Decode as:
-    <%= f.collection_select(:encoding, @encodings, :name, :human_name) %>
   </p>
 
   <p>

@@ -1,3 +1,5 @@
+<% breadcrumb :encoding_encode, @encoding %>
+
 <%= form_for(:form, method: 'GET') do |f| %>
   <p>
     Data to encode:<br/>
@@ -8,11 +10,6 @@
     This data is:
     <label><%= f.radio_button(:type, 'text') %>Text (UTF-8)</label>
     <label><%= f.radio_button(:type, 'hex') %>Binary as Hex</label>
-  </p>
-
-  <p>
-    Encode as:
-    <%= f.collection_select(:encoding, @encodings, :name, :human_name) %>
   </p>
 
   <p>

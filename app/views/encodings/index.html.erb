@@ -1,0 +1,7 @@
+<% breadcrumb :encodings %>
+
+<ul>
+  <% @encodings.each do |encoding| %>
+    <li><%= link_to encoding.human_name, :action => 'show', :id => encoding.name %></li>
+  <% end %>
+</ul>

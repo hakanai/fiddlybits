@@ -1,15 +1,14 @@
 class CharsetsController < ApplicationController
+  before_filter :load_charset, :except => [ :index ]
+
   def index
     @charsets = Fiddlybits::CharsetRegistry.find_all
   end
 
   def show
-    @charset = charset_from_params || return
   end
 
   def show_table
-    @charset = charset_from_params || return
-
     raise NotImplementedError if @charset.min_bytes_per_char != @charset.max_bytes_per_char
 
     @table = []
@@ -67,8 +66,8 @@ class CharsetsController < ApplicationController
   end
 
   def decode
-    @charset = charset_from_params || return
     @form = OpenStruct.new(params[:form])
+    @form.type ||= 'text'
 
     if !@form.data.blank?
       data = @form.data
@@ -80,9 +79,12 @@ class CharsetsController < ApplicationController
     end
   end
 
+  def load_charset
+    @charset = Fiddlybits::CharsetRegistry.find_by_name(params[:id]) || redirect_to(:action => 'index')
+  end
+
 private
 
   def charset_from_params
-    Fiddlybits::CharsetRegistry.find_by_name(params[:charset]) || (redirect_to(:action => 'index'); nil)
   end
 end

@@ -2,6 +2,6 @@
 
 <ul>
   <% @charsets.each do |charset| %>
-    <li><%= link_to charset.human_name, :action => 'show', :charset => charset.name %></li>
+    <li><%= link_to charset.human_name, action: 'show', id: charset.name %></li>
   <% end %>
 </ul>

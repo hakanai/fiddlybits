@@ -5,11 +5,14 @@ Fiddlybits::Application.routes.draw do
   root 'welcome#index'
 
   get 'charsets' => 'charsets#index'
-  get 'charsets/:charset' => 'charsets#show'
-  get 'charsets/:charset/decode' => 'charsets#decode'
-  get 'charsets/:charset/table' => 'charsets#show_table'
+  get 'charsets/:id' => 'charsets#show'
+  get 'charsets/:id/decode' => 'charsets#decode'
+  get 'charsets/:id/table' => 'charsets#show_table'
 
-  get 'encodings/:action' => 'encodings#:action'
+  get 'encodings' => 'encodings#index'
+  get 'encodings/:id' => 'encodings#show'
+  get 'encodings/:id/decode' => 'encodings#decode'
+  get 'encodings/:id/encode' => 'encodings#encode'
 
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

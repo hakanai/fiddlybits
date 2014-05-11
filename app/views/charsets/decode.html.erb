@@ -48,7 +48,7 @@
             <td>
               <% if fragment.explanation.is_a?(Fiddlybits::TableCharset::TableLookup) %>
                 <%= link_to 'table lookup', action: 'show_table',
-                                            charset: fragment.explanation.charset.name,
+                                            id: fragment.explanation.charset.name,
                                             anchor: "cell-#{fragment.explanation.bytes.map{|b| "%02X" % b}.join}" %>
               <% else %>
                 <%= fragment.explanation %>
