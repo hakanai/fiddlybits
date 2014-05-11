@@ -10,23 +10,36 @@
     <% end %>
   </head>
   <body>
-    <% title = nil -%>
-    <div class="breadcrumbs">
-      <% breadcrumbs(display_single_fragment: true).tap do |links| %>
-        <% title = links.pop.text -%>
-        <% links.each do |link| %>
-          <%= link_to link.text, link.url, class: (link.current? ? "current" : nil) %> &raquo;
+    <header>
+      <div class="header-links">
+      <!--Share Links-->
+      <!--About-->
+      <!--Bugs -->
+      </div>
+      <h1>Fiddlybits <span style="color: rgb(128,160,160)">wants a logo :'(</span></h1>
+    </header>
+
+    <div class="wrapper">
+      <% title = nil -%>
+      <% breadcrumbs.tap do |links| %>
+        <% if links.any? %>
+          <div class="breadcrumbs">
+            <% title = links.pop.text -%>
+            <% links.each do |link| %>
+              <%= link_to link.text, link.url, class: (link.current? ? "current" : nil) %> &raquo;
+            <% end %>
+          </div>
         <% end %>
       <% end %>
+      <h2><%= title %></h2>
+
+      <% if flash[:error] -%>
+        <div class="error">
+          <p><%= flash[:error] %></p>
+        </div>
+      <% end -%>
+
+      <%= yield %>
     </div>
-    <h1><%= title %></h1>
-
-    <% if flash[:error] -%>
-      <div class="error">
-        <p><%= flash[:error] %></p>
-      </div>
-    <% end -%>
-
-    <%= yield %>
   </body>
 </html>
