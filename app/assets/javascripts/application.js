@@ -14,3 +14,16 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+// Share button courtesy of: https://github.com/carrot/share-button
+//= require share.min
+
+$(".share-button").ready(function() {
+  new Share(".share-button", {
+    ui: {
+      flyout: "bottom left",
+      button_background: "rgb(128,160,160)",
+      button_color: "rgb(0,39,39)"
+    }
+  });
+});

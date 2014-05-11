@@ -20,6 +20,7 @@ html, body {
 
 header {
 	display: block;
+	position: relative;
 	padding: 0.5em;
 	border-bottom: 1px solid rgb(128,128,128);
 	margin: 0;
@@ -27,9 +28,18 @@ header {
 	color: white;
 }
 
-header div.header-links {
+div.header-links, div.share-button-top {
 	display: block;
 	float: right;
+	vertical-align: baseline;
+	padding-right: 1em; /* because of the scrollbar */
+}
+div.share-button-top {
+	clear: both;
+	position: absolute;
+	margin-top: 0.5em;
+	bottom: 1.1em;
+	right: 0.5em; /* to line up with links */
 }
 
 header a {
