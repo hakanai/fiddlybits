@@ -1,6 +1,4 @@
-<p><%= link_to "Back to #{@charset.human_name}", :action => 'show' %></p>
-
-<h1><%= @charset.human_name %> Mapping Table</h1>
+<% breadcrumb :charset_table, @charset %>
 
 <table class="character-table">
   <thead>

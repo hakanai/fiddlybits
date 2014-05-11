@@ -1,6 +1,4 @@
-<p><%= link_to "Back to charset list", :action => 'index' %></p>
-
-<h1><%= @charset.human_name %></h1>
+<% breadcrumb :charset, @charset %>
 
 <ul>
   <li><%= link_to 'Decode data using this charest', :action => 'decode' %></li>

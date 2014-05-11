@@ -1,3 +1,5 @@
+<% breadcrumb :charset_decode, @charset %>
+
 <%= form_for(:form, method: 'GET') do |f| %>
   <p>
     Data to decode using <%= @charset.human_name %>:<br/>

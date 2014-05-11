@@ -10,7 +10,16 @@
     <% end %>
   </head>
   <body>
-    <p><%= link_to 'Back to Top', :controller => 'welcome' %></p>
+    <% title = nil -%>
+    <div class="breadcrumbs">
+      <% breadcrumbs(display_single_fragment: true).tap do |links| %>
+        <% title = links.pop.text -%>
+        <% links.each do |link| %>
+          <%= link_to link.text, link.url, class: (link.current? ? "current" : nil) %> &raquo;
+        <% end %>
+      <% end %>
+    </div>
+    <h1><%= title %></h1>
 
     <% if flash[:error] -%>
       <div class="error">

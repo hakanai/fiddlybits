@@ -148,7 +148,7 @@ module Fiddlybits
     #TODO The sequence for each set should be in a table somewhere.
     def self.designate_set(n, sequence, charset)
       working_set = "g#{n}".to_sym
-      explanation = "switch to #{charset.name}"
+      explanation = "switch to #{charset.human_name}"
       explanation += " (designated to #{working_set.to_s.upcase})" if working_set != :g0
       {
         sequence: sequence,

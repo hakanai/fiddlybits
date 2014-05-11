@@ -40,6 +40,9 @@ gem 'unicorn'
 # Exception reporting
 gem 'exception_notification'
 
+# Breadcrumb management
+gem 'gretel'
+
 # Use Capistrano for deployment
 gem 'capistrano', group: :development
 gem 'capistrano-rails', '~> 1.1', group: :development
