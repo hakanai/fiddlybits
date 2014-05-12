@@ -196,7 +196,6 @@ apple/romanian.txt					Mac OS Romanian
 apple/symbol.txt					Mac OS Symbol
 apple/thai.txt						Mac OS Thai
 apple/turkish.txt					Mac OS Turkish
-apple/ukraine.txt					Mac OS Ukraine
 
 microsoft/ebcdic/cp037.txt			EBCDIC 037
 microsoft/ebcdic/cp500.txt			EBCDIC 500
