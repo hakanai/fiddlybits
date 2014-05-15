@@ -48,7 +48,7 @@ module Fiddlybits
         elsif b >= 20 && b < 0x80
           decode_one_character(state, @sets[:g0])
         else
-          decode_result << RemainingData.new([b])
+          state.decode_result << RemainingData.new([b])
           state.bytes = state.bytes[1..-1]
         end
       end
