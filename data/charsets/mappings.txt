@@ -88,6 +88,11 @@ iso-8859/8859-16-2001.txt			ISO 8859-16:2001
 
 koi/koi8-r.txt						KOI8-R
 koi/koi8-u.txt						KOI8-U
+tamil/tscii-2007.txt				TSCII:2007
+
+# 8-bit encodings which are not extensions to US-ASCII
+
+viet/viscii-1992.txt				VISCII:1992			# ISO-IR-180
 
 # China (PRC)
 eastasia/gb-2312-1980.txt			GB 2312-80		# aka GB, GB0
