@@ -16,6 +16,9 @@ Fiddlybits::Application.routes.draw do
   get 'encodings/:id/decode' => 'encodings#decode'
   get 'encodings/:id/encode' => 'encodings#encode'
 
+  %w( 404 422 500 ).each do |code|
+    get code, :to => "errors#show", :code => code
+  end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
