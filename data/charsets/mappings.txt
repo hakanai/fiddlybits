@@ -63,9 +63,17 @@ iso-646/646-yu.txt					ISO 646-YU			# JUS I.B1.002, YUSCII
 
 # ASCII variants which are *not* ISO 646 compliant.
 elot/elot-927.txt					ELOT 927			# ISO-IR-088
-koi/koi7.txt						KOI7
+koi/gost-13052.txt					GOST-13052			# Sometimes called KOI-0
+koi/koi7.txt						KOI7				# GOST-19768-74 (7bit)
 #TODO si/si-960.txt					SI 960
 asmo/asmo-449.txt					ASMO 449
+
+#TODO JUS I.B1.003 (another YUSCII)
+#TODO JUS I.B1.004 (another YUSCII)
+# http://en.wikipedia.org/wiki/YUSCII
+# http://users.volja.net/romag/qwyx/Tabela.html
+
+#TOOD http://en.wikipedia.org/wiki/GOST_10859
 
 # 8-bit encodings as extensions to US-ASCII
 iso-8859/8859-1-1998.txt			ISO 8859-1:1998
@@ -86,13 +94,23 @@ iso-8859/8859-14-1998.txt			ISO 8859-14:1998
 iso-8859/8859-15-1999.txt			ISO 8859-15:1999
 iso-8859/8859-16-2001.txt			ISO 8859-16:2001
 
-koi/koi8-r.txt						KOI8-R
+koi/koi8.txt						KOI8
+koi/koi8-b.txt						KOI8-B
+#TODO								ISO-IR-111			# http://czyborra.com/charsets/cyrillic.html (not an encoding)
+#TOOD								GOST-19768-87		# http://czyborra.com/charsets/cyrillic.html
+koi/koi8-r.txt						KOI8-R				# Relcom variant
 koi/koi8-u.txt						KOI8-U
+#TODO 								KOI8-Unified		# http://czyborra.com/charsets/cyrillic.html
 tamil/tscii-2007.txt				TSCII:2007
 
 # 8-bit encodings which are not extensions to US-ASCII
 
 viet/viscii-1992.txt				VISCII:1992			# ISO-IR-180
+
+# Multi-byte encodings
+
+#TOOD TACE16 - http://en.wikipedia.org/wiki/TACE16
+# (Sounds like it has multiple versions..?)
 
 # China (PRC)
 eastasia/gb-2312-1980.txt			GB 2312-80		# aka GB, GB0
