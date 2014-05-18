@@ -154,18 +154,21 @@ eastasia/cns-11643-1992-plane7.txt	CNS 11643-1992 plane 7
 #									CNS 11643-1986 plane 14 goes here
 
 # Japan
-eastasia/jisx-0201-1976-kana.txt	JIS X 0201-1976 kana
-eastasia/jisx-0201-1976-roman.txt	JIS X 0201-1976 roman
-eastasia/jisx-0201-1976.txt			JIS X 0201-1976
+eastasia/jisx-0201-1997-kana.txt	JIS X 0201-1976 kana
+eastasia/jisx-0201-1997-roman.txt	JIS X 0201-1976 roman
+eastasia/jisx-0201-1997.txt			JIS X 0201-1976
+eastasia/jisx-0201-1997-kana.txt	JIS X 0201-1997 kana	# duplication here until we sort out aliases
+eastasia/jisx-0201-1997-roman.txt	JIS X 0201-1997 roman
+eastasia/jisx-0201-1997.txt			JIS X 0201-1997
 eastasia/jisx-0208-1978.txt			JIS X 0208-1978
 eastasia/jisx-0208-1983.txt			JIS X 0208-1983
-eastasia/jisx-0208-1990.txt			JIS X 0208-1990
+eastasia/jisx-0208-1997.txt			JIS X 0208-1990
+eastasia/jisx-0208-1997.txt			JIS X 0208-1997			# duplication here until we sort out aliases
 eastasia/jisx-0212-1990.txt			JIS X 0212-1990
 eastasia/jisx-0213-2000-plane1.txt	JIS X 0213-2000 plane 1
 eastasia/jisx-0213-2000-plane2.txt	JIS X 0213-2000 plane 2
 eastasia/jisx-0213-2004-plane1.txt	JIS X 0213-2004 plane 1
 eastasia/jisx-0213-2004-plane2.txt	JIS X 0213-2004 plane 2
-eastasia/shift-jis.txt				Shift JIS
 
 # South Korea
 # alias: KS C 5601-* <=> KS X 1001-*
