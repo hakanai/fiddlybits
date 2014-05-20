@@ -99,6 +99,15 @@ module Fiddlybits
         g3: TableCharset::JIS_X_0212_1990
       })
 
+    EUC_JISX0213_2004 = EucCharset.new(
+      'EUC-JISX0213:2004',
+      {
+        g0: TableCharset::JIS_X_0201_1976_ROMAN,
+        g1: TableCharset::JIS_X_0213_2004_PLANE_1,
+        g2: TableCharset::JIS_X_0201_1976_KANA,
+        g3: TableCharset::JIS_X_0213_2004_PLANE_2
+      })
+
     # aka KS X 2901 aka RFC 1557
     EUC_KR = EucCharset.new(
       'EUC-KR:1992',
