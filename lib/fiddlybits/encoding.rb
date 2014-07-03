@@ -27,7 +27,7 @@ module Fiddlybits
         ].each do |cls|
           all += cls.constants.sort.map { |c| cls.const_get(c) }.select { |v| v.is_a?(Encoding) }
         end
-        all.sort_by! { |cs| cs.name }
+        all.sort_by! { |cs| cs.human_name }
         @all = all
       end
 
