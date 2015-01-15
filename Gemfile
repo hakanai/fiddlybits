@@ -55,8 +55,7 @@ gem 'capistrano-rbenv', '~> 2.0', group: :development
 gem 'capistrano-bundler', '~> 1.1.2', group: :development
 
 group :debug do
-  # Use debugger
-  gem 'debugger', group: [:development, :test]
+  gem 'debugger'
 end
 
 # Application stuff
