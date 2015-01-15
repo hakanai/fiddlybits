@@ -42,10 +42,33 @@ module Fiddlybits
       nil
       )
 
+    # http://philzimmermann.com/docs/human-oriented-base-32-encoding.txt
+    ZIMMERMANN = new(
+      'z-base-32',
+      'Base32 (z-base-32)',
+      'ybndrfg8ejkmcpqxot1uwisza345h769'
+      )
+
+    CROCKFORD = new(
+      'base32crockford',
+      'Base32 (Crockford variant)',
+      '0123456789ABCDEFGHJKMNPQRSTVWXYZ'
+      )
+
+    #TODO An earlier form of base 32 notation was used by programmers working on the Electrologica X1 to represent machine addresses. The "digits" were represented as decimal numbers from 0 to 31. For example, 12-16 would represent the machine address 400 (= 12*32 + 16).
+
     WITH_HEX_ALPHABET = new(
       'base32hex',
-      'Base32 with Hex Alphabet',
+      'Base32 (with extended hex alphabet)',
       '0123456789ABCDEFGHIJKLMNOPQRSTUV'
       )
+
+    # TODO: The order on this is wrong.
+   # ALT_1 = new(
+   #   'base32alt1',
+   #   'Base32 (without 0, 1, L, O)',
+   #   '23456789ABCDEFGHIJKMNPQRSTUVWXYZ'
+   #   )
+
   end
 end
