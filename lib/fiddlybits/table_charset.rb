@@ -64,11 +64,10 @@ module Fiddlybits
 
       @format = format.freeze
       @file = file.freeze
-      @table_data = nil
     end
 
     def table_data
-      if !@table_data
+      if !defined?(@table_data) || !@table_data
         @table_data = @format.parse(@file)
         freeze # no further mutation once loaded
       end

@@ -50,7 +50,7 @@ module Fiddlybits
       @initial_state.call(state)
       while !state.bytes.empty?
         # Are we looking at an escape sequence?
-        rule = @rules.find { |rule| seq = rule[:sequence]; state.bytes[0..seq.size-1] == seq }
+        rule = @rules.find { |r| seq = r[:sequence]; state.bytes[0..seq.size-1] == seq }
         if rule
           escape_sequence = rule[:sequence]
           meaning = readable_escape_sequence(escape_sequence) + ' - ' + rule[:explanation]

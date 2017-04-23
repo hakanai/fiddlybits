@@ -5,7 +5,7 @@ module Fiddlybits
     end
 
     def self.find_all
-      if !@all
+      if !defined?(@all) || !@all
         all = []
         [ TableCharset, Iso2022Charset, EucCharset, ShiftJisCharset ].each do |cls|
           all += cls.constants.map { |c| cls.const_get(c) }.select { |v| v.is_a?(Charset) }
