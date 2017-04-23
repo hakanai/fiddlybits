@@ -64,6 +64,7 @@ module Fiddlybits
 
       @format = format.freeze
       @file = file.freeze
+      @table_data = nil
     end
 
     def table_data
