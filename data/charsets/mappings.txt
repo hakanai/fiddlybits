@@ -179,6 +179,8 @@ eastasia/ksx-1001-1992.txt			KS X 1001-1992		# = 1989 = 1987 = 1986
 #TODO								KS X 1001-2002 - added postal sign
 # alias: KS C 5657-* <=> KS X 1002-*
 #TODO								KS X 1002-1991 - ???
+# Hansoft Word Processor proprietary
+eastasia/hnc.txt					HNC 				# v3
 
 # KS X 1003-1993 - aka KS-Roman, ISO-646-KR, ECMA-6 - ASCII with \ replaced by the won sign
 #				 - alias: 1989 <=> 1993
@@ -279,4 +281,5 @@ microsoft/windows/cp1255.txt		Microsoft code page 1255 (Hebrew)
 microsoft/windows/cp1256.txt		Microsoft code page 1256 (Arabic)
 microsoft/windows/cp1257.txt		Microsoft code page 1257 (Baltic)
 microsoft/windows/cp1258.txt		Microsoft code page 1258 (Vietnam)
+
 
