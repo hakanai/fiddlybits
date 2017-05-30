@@ -48,7 +48,7 @@ gem 'google-analytics-rails'
 gem 'gretel'
 
 # Use Capistrano for deployment
-gem 'capistrano', '~> 3.1.0', group: :development
+gem 'capistrano', group: :development
 gem 'capistrano-rails', '~> 1.1', group: :development
 gem 'capistrano3-unicorn', group: :development
 gem 'capistrano-rbenv', '~> 2.0', group: :development
