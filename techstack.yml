@@ -1,0 +1,396 @@
+repo_name: hakanai/fiddlybits
+report_id: 916e2af0a14b5e2e0fa7bbbcefa868da
+version: 0.1
+repo_type: Public
+timestamp: '2024-02-29T19:59:38+00:00'
+requested_by: hakanai
+provider: github
+branch: main
+detected_tools_count: 27
+tools:
+- name: CSS 3
+  description: The latest evolution of the Cascading Style Sheets language
+  website_url: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/6727/css.png
+  detection_source_url: https://github.com/hakanai/fiddlybits
+  detection_source: Repo Metadata
+- name: JavaScript
+  description: Lightweight, interpreted, object-oriented language with first-class
+    functions
+  website_url: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1209/javascript.jpeg
+  detection_source_url: https://github.com/hakanai/fiddlybits
+  detection_source: Repo Metadata
+- name: Ruby
+  description: A dynamic, interpreted, open source programming language with a focus
+    on simplicity and productivity
+  website_url: https://www.ruby-lang.org
+  version: 2.2.6
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/989/ruby.png
+  detection_source_url: https://github.com/hakanai/fiddlybits/blob/main/.ruby-version
+  detection_source: Repo Metadata
+  last_updated_by: Trejkaz (pen name)
+  last_updated_on: 2017-04-23 01:16:29.000000000 Z
+- name: Rails
+  description: Web development that doesn't hurt
+  website_url: http://rubyonrails.org/
+  version: 4.2.8
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Frameworks (Full Stack)
+  image_url: https://img.stackshare.io/service/990/x57_Lorv.png
+  detection_source_url: https://github.com/hakanai/fiddlybits/blob/main/Gemfile.lock
+  detection_source: Gemfile
+  last_updated_by: Trejkaz (pen name)
+  last_updated_on: 2017-04-23 01:22:11.000000000 Z
+- name: jQuery
+  description: The Write Less, Do More, JavaScript Library.
+  website_url: http://jquery.com/
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Javascript UI Libraries
+  image_url: https://img.stackshare.io/service/1021/lxEKmMnB_400x400.jpg
+  detection_source_url: https://github.com/hakanai/fiddlybits/blob/main/Gemfile
+  detection_source: Gemfile
+  last_updated_by: Trejkaz
+  last_updated_on: 2014-05-11 14:14:30.000000000 Z
+- name: Capistrano
+  description: A remote server automation and deployment tool written in Ruby
+  website_url: http://capistranorb.com/
+  version: 3.8.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Server Configuration and Automation
+  image_url: https://img.stackshare.io/service/661/5da4e1d78e930197cb7dc002ceafdfda.png
+  detection_source_url: https://github.com/hakanai/fiddlybits/blob/main/Gemfile.lock
+  detection_source: Gemfile
+  last_updated_by: Trejkaz (pen name)
+  last_updated_on: 2017-05-30 08:08:03.000000000 Z
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/hakanai/fiddlybits
+  detection_source: Repo Metadata
+- name: RubyGems
+  description: Easily download, install, and use ruby software packages on your system
+  website_url: https://rubygems.org/
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Package Managers
+  image_url: https://img.stackshare.io/service/12795/5jL6-BA5_400x400.jpeg
+  detection_source_url: https://github.com/hakanai/fiddlybits/blob/main/Gemfile
+  detection_source: Gemfile
+  last_updated_by: Trejkaz
+  last_updated_on: 2014-03-15 04:24:19.000000000 Z
+- name: Travis CI
+  description: A hosted continuous integration service for open source and private
+    projects
+  website_url: http://travis-ci.com/
+  open_source: false
+  hosted_saas: true
+  category: Build, Test, Deploy
+  sub_category: Continuous Integration
+  image_url: https://img.stackshare.io/service/460/Lu6cGu0z_400x400.png
+  detection_source_url: https://github.com/hakanai/fiddlybits/blob/main/.travis.yml
+  detection_source: ".travis.yml"
+  last_updated_by: Trejkaz
+  last_updated_on: 2015-01-15 10:04:48.000000000 Z
+- name: Twilio SendGrid
+  description: Email Delivery. Simplified.
+  website_url: http://sendgrid.com
+  open_source: false
+  hosted_saas: true
+  category: Communications
+  sub_category: Transactional Email
+  image_url: https://img.stackshare.io/service/43/kQ_6nwmP.jpg
+  detection_source_url: https://github.com/hakanai/fiddlybits/blob/main/config/environments/production.rb
+  detection_source: config/environments/production.rb
+  last_updated_by: Trejkaz
+  last_updated_on: 2014-03-15 04:24:19.000000000 Z
+- name: Gretel
+  description: Synthesize, transform and share large datasets easily
+  website_url: https://gretel.ai/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Application Utilities
+  sub_category: Data Transfer
+  image_url: https://img.stackshare.io/service/20921/default_65f7cfa40f776b2b60c66c3965fa8963d2989174.jpg
+  detection_source_url: https://github.com/hakanai/fiddlybits/blob/main/Gemfile
+  detection_source: Gemfile
+  last_updated_by: Trejkaz
+  last_updated_on: 2014-05-11 08:39:34.000000000 Z
+- name: UglifyJS
+  description: A JavaScript parser, minifier, compressor and beautifier toolkit.
+  website_url: http://lisperator.net/uglifyjs/
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Javascript Utilities & Libraries
+  image_url: https://img.stackshare.io/service/2203/default_9058af6f02375a99f634f537d727e32df92ac262.png
+  detection_source_url: https://github.com/hakanai/fiddlybits/blob/main/Gemfile
+  detection_source: Gemfile
+  last_updated_by: Trejkaz
+  last_updated_on: 2014-03-15 04:24:19.000000000 Z
+- name: base32
+  description: Ruby extension for base32 encoding and decoding
+  package_url: https://rubygems.org/base32
+  version: 0.3.2
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: RubyGems Packages
+  image_url: https://img.stackshare.io/package/rubygems/image.png
+  detection_source_url: https://github.com/hakanai/fiddlybits/blob/main/Gemfile.lock
+  detection_source: Gemfile
+  last_updated_by: Trejkaz
+  last_updated_on: 2014-04-21 13:18:03.000000000 Z
+- name: byebug
+  description: Byebug is a Ruby debugger
+  package_url: https://rubygems.org/byebug
+  version: 9.0.6
+  license: BSD-2-Clause
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: RubyGems Packages
+  image_url: https://img.stackshare.io/package/18849/default_887cb273c504fac90d07fc552b7b223fbb32ca39.png
+  detection_source_url: https://github.com/hakanai/fiddlybits/blob/main/Gemfile.lock
+  detection_source: Gemfile
+  last_updated_by: Trejkaz (pen name)
+  last_updated_on: 2017-04-23 00:52:01.000000000 Z
+- name: capistrano-bundler
+  description: Bundler support for Capistrano 3.x
+  package_url: https://rubygems.org/capistrano-bundler
+  version: 1.1.4
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: RubyGems Packages
+  image_url: https://img.stackshare.io/package/19561/default_42e2846cdbe2604c34f08ca8adabee9f1880d3f6.png
+  detection_source_url: https://github.com/hakanai/fiddlybits/blob/main/Gemfile.lock
+  detection_source: Gemfile
+  last_updated_by: Trejkaz (pen name)
+  last_updated_on: 2017-05-30 08:08:03.000000000 Z
+- name: capistrano-rails
+  description: Rails specific Capistrano tasks
+  package_url: https://rubygems.org/capistrano-rails
+  version: 1.2.3
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: RubyGems Packages
+  image_url: https://img.stackshare.io/package/19576/image.png
+  detection_source_url: https://github.com/hakanai/fiddlybits/blob/main/Gemfile.lock
+  detection_source: Gemfile
+  last_updated_by: Trejkaz (pen name)
+  last_updated_on: 2017-05-30 08:08:03.000000000 Z
+- name: capistrano-rbenv
+  description: Rbenv integration for Capistrano
+  package_url: https://rubygems.org/capistrano-rbenv
+  version: 2.1.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: RubyGems Packages
+  image_url: https://img.stackshare.io/package/rubygems/image.png
+  detection_source_url: https://github.com/hakanai/fiddlybits/blob/main/Gemfile.lock
+  detection_source: Gemfile
+  last_updated_by: Trejkaz (pen name)
+  last_updated_on: 2017-05-30 08:08:03.000000000 Z
+- name: exception_notification
+  description: Exception notification for Rails apps
+  package_url: https://rubygems.org/exception_notification
+  version: 4.2.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: RubyGems Packages
+  image_url: https://img.stackshare.io/package/19581/image.png
+  detection_source_url: https://github.com/hakanai/fiddlybits/blob/main/Gemfile.lock
+  detection_source: Gemfile
+  last_updated_by: Trejkaz
+  last_updated_on: 2014-05-04 09:18:05.000000000 Z
+- name: hamster
+  description: Efficient
+  package_url: https://rubygems.org/hamster
+  version: 3.0.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: RubyGems Packages
+  image_url: https://img.stackshare.io/package/19709/default_d8421da17a8d807adaa0884c1485b097b8d1ac07.png
+  detection_source_url: https://github.com/hakanai/fiddlybits/blob/main/Gemfile.lock
+  detection_source: Gemfile
+  last_updated_by: Trejkaz
+  last_updated_on: 2014-04-12 12:10:54.000000000 Z
+- name: jbuilder
+  description: Create JSON structures via a Builder-style DSL
+  package_url: https://rubygems.org/jbuilder
+  version: 1.5.3
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: RubyGems Packages
+  image_url: https://img.stackshare.io/package/19105/default_fca7ffebc4c078263714788a3e4853bf74bde297.png
+  detection_source_url: https://github.com/hakanai/fiddlybits/blob/main/Gemfile.lock
+  detection_source: Gemfile
+  last_updated_by: Trejkaz
+  last_updated_on: 2014-03-15 04:24:19.000000000 Z
+- name: jquery-rails
+  description: This gem provides jQuery and the jQuery-ujs driver for your Rails 4+
+    application
+  package_url: https://rubygems.org/jquery-rails
+  version: 4.3.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: RubyGems Packages
+  image_url: https://img.stackshare.io/package/18864/default_96cb61a9c0f8ef41b80df83209dca4f4c229184e.png
+  detection_source_url: https://github.com/hakanai/fiddlybits/blob/main/Gemfile.lock
+  detection_source: Gemfile
+  last_updated_by: Trejkaz (pen name)
+  last_updated_on: 2017-04-23 01:22:11.000000000 Z
+  vulnerabilities:
+  - name: jQuery Cross Site Scripting vulnerability
+    cve_id: CVE-2020-23064
+    cve_url: https://github.com/advisories/GHSA-257q-pv89-v3xv
+    detected_date: Jul 8
+    severity: moderate
+    first_patched: 4.4.0
+  - name: XSS in jQuery as used in Drupal, Backdrop CMS, and other products
+    cve_id: CVE-2019-11358
+    cve_url: https://github.com/advisories/GHSA-6c3j-c64m-qhgq
+    detected_date: May 31
+    severity: moderate
+    first_patched: 4.3.4
+  - name: Potential XSS vulnerability in jQuery
+    cve_id: CVE-2020-11022
+    cve_url: https://github.com/advisories/GHSA-gxr4-xjj5-5px2
+    detected_date: Sep 26
+    severity: moderate
+    first_patched: 4.4.0
+  - name: Potential XSS vulnerability in jQuery
+    cve_id: CVE-2020-11023
+    cve_url: https://github.com/advisories/GHSA-jpcq-cgw6-v4j6
+    detected_date: May 5
+    severity: moderate
+    first_patched: 4.4.0
+- name: sass-rails
+  description: Sass adapter for the Rails asset pipeline
+  package_url: https://rubygems.org/sass-rails
+  version: 4.0.5
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: RubyGems Packages
+  image_url: https://img.stackshare.io/package/18876/default_d416e715a80ce80ae31b87cff032f5873c8a9d2a.png
+  detection_source_url: https://github.com/hakanai/fiddlybits/blob/main/Gemfile.lock
+  detection_source: Gemfile
+  last_updated_by: Trejkaz (pen name)
+  last_updated_on: 2017-04-23 01:22:11.000000000 Z
+- name: sdoc
+  description: Rdoc generator html with javascript search index
+  package_url: https://rubygems.org/sdoc
+  version: 0.4.2
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: RubyGems Packages
+  image_url: https://img.stackshare.io/package/19261/default_4ed5689ec4d74680b66320d503f54e39a95d4848.png
+  detection_source_url: https://github.com/hakanai/fiddlybits/blob/main/Gemfile.lock
+  detection_source: Gemfile
+  last_updated_by: Trejkaz
+  last_updated_on: 2014-03-15 04:24:19.000000000 Z
+- name: therubyracer
+  description: Call JavaScript code and manipulate JavaScript objects from Ruby
+  package_url: https://rubygems.org/therubyracer
+  version: 0.12.3
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: RubyGems Packages
+  image_url: https://img.stackshare.io/package/19004/default_b93931146bf44c92297cef24be9c35899def9938.png
+  detection_source_url: https://github.com/hakanai/fiddlybits/blob/main/Gemfile.lock
+  detection_source: Gemfile
+  last_updated_by: Trejkaz
+  last_updated_on: 2015-01-15 10:08:24.000000000 Z
+- name: uglifier
+  description: Uglifier minifies JavaScript files by wrapping UglifyJS to be accessible
+    in Ruby
+  package_url: https://rubygems.org/uglifier
+  version: 3.2.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: RubyGems Packages
+  image_url: https://img.stackshare.io/package/18967/default_20d16c1471b93397c8ef93b19baf0989f59663c0.png
+  detection_source_url: https://github.com/hakanai/fiddlybits/blob/main/Gemfile.lock
+  detection_source: Gemfile
+  last_updated_by: Trejkaz
+  last_updated_on: 2014-03-15 04:24:19.000000000 Z
+- name: unicode_utils
+  description: Additional Unicode aware functions for Ruby 1.9
+  package_url: https://rubygems.org/unicode_utils
+  version: 1.4.0
+  license: BSD-2-Clause
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: RubyGems Packages
+  image_url: https://img.stackshare.io/package/19401/default_bc61bbf51377881e0a39ce32e90b4c2de5f8fd50.png
+  detection_source_url: https://github.com/hakanai/fiddlybits/blob/main/Gemfile.lock
+  detection_source: Gemfile
+  last_updated_by: Trejkaz
+  last_updated_on: 2014-04-13 12:13:38.000000000 Z
+- name: unicorn
+  description: Unicorn is an HTTP server for Rack applications designed to only serve
+    fast clients on low-latency
+  package_url: https://rubygems.org/unicorn
+  version: 5.3.0
+  license: GPL-2.0+,Ruby
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: RubyGems Packages
+  image_url: https://img.stackshare.io/package/19218/default_504c6d1cb95a30a2134a5c2236c1c37c91700cc1.png
+  detection_source_url: https://github.com/hakanai/fiddlybits/blob/main/Gemfile.lock
+  detection_source: Gemfile
+  last_updated_by: Trejkaz
+  last_updated_on: 2014-04-13 12:13:38.000000000 Z
