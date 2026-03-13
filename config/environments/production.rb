@@ -90,7 +90,7 @@ Fiddlybits::Application.configure do
     }
 
   # Google Analytics
-  GA.tracker = "UA-50861148-1"
+  GA.tracker = "G-SD5G0LEHCX"
 end
 
 
